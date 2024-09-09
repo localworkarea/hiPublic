@@ -1,0 +1,129 @@
+// Medium - font-weight 500
+// CompactBlack - font-weight 700
+// TightBlack - font-weight 900
+
+[class*="__container"] {
+  padding-left: toRem(20);
+  padding-right: toRem(20);
+  width: 100%;
+  margin-inline: auto;
+  @include adaptiveValue("max-width", 1140, 900,0,1920,1440.98);
+}
+
+body {
+  background-color: $purple;
+  // Webkit-браузеры (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: 6px; /* Ширина вертикального скроллбара */
+    height: 12px; /* Высота горизонтального скроллбара */
+  }
+  
+  &::-webkit-scrollbar-track {
+    // Цвет фона дорожки скроллбара
+    background-color: #B7B7B7; 
+    // Закругленные углы дорожки скроллбара
+    // border-radius: 0px; 
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    // Цвет ползунка скроллбара 
+    background-color: #861083;
+    // Закругленные углы ползунка
+    // border-radius: 3px;
+    // Отступ между ползунком и дорожкой
+    // border: 1px solid #00074B;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    // Цвет ползунка при наведении 
+    background-color: #92258e;
+  }
+
+  // Firefox
+  * {
+    // Ширина скроллбара: thin (тонкий) или auto (стандартный)
+    scrollbar-width: thin;
+    // Цвета ползунка и дорожки скроллбара
+    scrollbar-color: #861083 #B7B7B7;
+  }
+}
+
+
+%sectionPddTB {
+  // margin-top: toRem(-132);
+  @include adaptiveValue("margin-top", -132, -50);
+  @include adaptiveValue("padding-top", 180, 95);
+  @include adaptiveValue("padding-bottom", 230, 95);
+}
+%left-Right-up {
+  @media (min-width:$mobile) {
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+  }
+  @media (max-width:$mobile) {
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+%left-Right-dwn {
+  @media (min-width:$mobile) {
+    clip-path: polygon(0 0%, 100% 10%, 100% 100%, 0 100%);
+  }
+  @media (max-width:$mobile) {
+    clip-path: polygon(0 0%, 100% 3%, 100% 100%, 0 100%);
+  }
+}
+
+.title-main {
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: toRem(30);
+  @include adaptiveValue("font-size", 144, 102,2,1440.98,389.98);
+  @media (max-width: toEm(389.98)) and (min-width: toEm(360.98)) {
+      font-size: toRem(90);
+  }
+  @media (max-width: toEm(360.98)){
+      font-size: toRem(75);
+  }
+}
+
+.sec-org {
+  background-color: $orange;
+  h2 {
+    color: #fff;
+  }
+}
+.sec-prp {
+  background-color: $purple;
+  h2 {
+    color: #fff;
+  }
+}
+.sec-wht {
+  background-color: #fff;
+  h2 {
+    color: $purple;
+  }
+}
+.clr-pr {
+  color: $purple
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  font-size: toRem(18);
+  font-weight: 500;
+  padding: toRem(5) toRem(10);
+  transition: background-color .3s ease, box-shadow .3s ease;
+  @include adaptiveValue("min-height", 60, 70,0,768.98,480.98);
+  &--one {
+    background-color: $yellow;
+    box-shadow: 0 0 22px 0 rgba(252, 241, 24, 0.6);
+    @media (any-hover: hover){
+      &:hover{
+        background-color: #fff;
+        box-shadow: 0 0 10px 0 rgba(252, 241, 24, 0.3);
+      }
+    }
+  }
+}
