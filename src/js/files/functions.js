@@ -137,6 +137,18 @@ export let bodyUnlock = (delay = 500) => {
 			});
 			document.body.style.paddingRight = ''
 			document.documentElement.classList.remove("lock")
+
+			// == LOCAL CODE - Remove padding from .header
+			const header = document.querySelector('.header');
+			if (header) {
+				header.style.paddingRight = '';
+			}
+			// ==  Update data-smooth-scroll if it exists
+			if (document.body.hasAttribute('data-smooth-scroll')) {
+				document.body.setAttribute('data-smooth-scroll', 'true');
+			}
+			// =============================================
+
 		}, delay)
 		bodyLockStatus = false
 		setTimeout(function () {
@@ -154,6 +166,17 @@ export let bodyLock = (delay = 500) => {
 
 		document.body.style.paddingRight = lockPaddingValue
 		document.documentElement.classList.add("lock")
+
+				// == LOCAL CODE -  Add padding to .header
+				const header = document.querySelector('.header');
+				if (header) {
+					header.style.paddingRight = lockPaddingValue;
+				}
+				// Update data-smooth-scroll if it exists
+				if (document.body.hasAttribute('data-smooth-scroll')) {
+					document.body.setAttribute('data-smooth-scroll', 'false');
+				}
+				// =================================================
 
 		bodyLockStatus = false
 		setTimeout(function () {

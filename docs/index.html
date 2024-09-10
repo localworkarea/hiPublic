@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20240909231009">
+	<link rel="stylesheet" href="css/style.min.css?_v=20240910193021">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,33 @@
 
 <body data-smooth-scroll="true">
 	<div class="wrapper">
-		<header class="header">
-			<div class="header__container">
+		<header class="header home-header">
+			<div class="header__wrapper">
+				<button type="button" class="header__icon icon-menu" aria-label="open menu">
+					<span class="icon-menu__item">
+						<span></span>
+					</span>
+				</button>
+				<a href="index.html" class="header__logo">
+					<img src="img/icons/logo.svg" width="200" height="60" alt="logo HiPUBLIC">
+				</a>
+				<a href="contacts.html" data-da=".menu,768.98,last" class="header__contacts btn btn--one">Contacts us</a>
+				<nav class="header__menu menu">
+					<ul class="menu__list">
+						<li class="menu__item">
+							<div class="menu__link-wr"><a href="" class="menu__link">What we do</a></div>
+						</li>
+						<li class="menu__item">
+							<div class="menu__link-wr"><a href="" class="menu__link">Advantages</a></div>
+						</li>
+						<li class="menu__item">
+							<div class="menu__link-wr"><a href="" class="menu__link">Influencers</a></div>
+						</li>
+						<li class="menu__item">
+							<div class="menu__link-wr"><a href="" class="menu__link">Our team</a></div>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</header>
 		<main class="page">
@@ -295,13 +320,244 @@
 					</ul>
 				</div>
 			</section>
+			<section class="team sec-wht">
+				<div class="team__container">
+					<h2 class="team__title title-main">
+						Our Team
+					</h2>
+					<ul class="team__list">
+						<li class="team__item">
+							<div class="team__img">
+								<img class="ibg" src="img/team/team-1.webp" width="200" height="232" alt="Image">
+							</div>
+							<div class="team__body">
+								<p class="team__name">Kyle</p>
+								<p class="team__position">Founder and Talent Manager</p>
+							</div>
+						</li>
+						<li class="team__item">
+							<div class="team__img">
+								<img class="ibg" src="img/team/team-2.webp" width="200" height="232" alt="Image">
+							</div>
+							<div class="team__body">
+								<p class="team__name">Joan</p>
+								<p class="team__position">Talent and Social Media Manager</p>
+							</div>
+						</li>
+						<li class="team__item">
+							<div class="team__img">
+								<img class="ibg" src="img/team/team-3.webp" width="200" height="232" alt="Image">
+							</div>
+							<div class="team__body">
+								<p class="team__name">Nigel</p>
+								<p class="team__position">Talent Manager</p>
+							</div>
+						</li>
+						<li class="team__item">
+							<div class="team__img">
+								<img class="ibg" src="img/team/team-4.webp" width="200" height="232" alt="Image">
+							</div>
+							<div class="team__body">
+								<p class="team__name">Emily</p>
+								<p class="team__position">Talent Manager</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="blog sec-prp">
+				<div class="blog__container">
+					<h2 class="blog__title title-main">
+						Blog
+					</h2>
+					<div class="blog__slider swiper">
+						<div class="blog__wrapper swiper-wrapper">
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-1.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											VTuber Awards wins Webby Award
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												Launching an industry first heatsink cooled NVMe SSD in partnership with EKWB, Western Digital reached out to Evolved to help craft an engaging campaign around their new flagship drive, starring popular
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">10.12.2023</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-2.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											Western Digital
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">01.04.2024</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-3.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											Filian's Vtuber Awards set peak viewership records
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												VTubing’s first major award show is coming in December, with the VTuber Awards 2023 hosted by Filian. VTubing’s first major award show is coming in December, with the VTuber Awards 2023 hosted by Filian
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">10.12.2023</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-1.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											VTuber Awards wins Webby Award
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												Launching an industry first heatsink cooled NVMe SSD in partnership with EKWB, Western Digital reached out to Evolved to help craft an engaging campaign around their new flagship drive, starring popular
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">10.12.2023</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-2.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											Western Digital
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">01.04.2024</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+							<div class="blog__slide swiper-slide">
+								<article class="item-blog">
+									<div class="item-blog__img">
+										<img class="ibg" src="img/blog/blog-3.webp" width="328" height="200" alt="Image">
+									</div>
+									<a href="article.html" class="item-blog__body" aria-label="link to article page">
+										<h3 class="item-blog__title">
+											Filian's Vtuber Awards set peak viewership records
+										</h3>
+										<div class="item-blog__info">
+											<p>
+												VTubing’s first major award show is coming in December, with the VTuber Awards 2023 hosted by Filian
+											</p>
+										</div>
+										<div class="item-blog__footer">
+											<p class="item-blog__time">
+												<time datetime="2023-12-10">10.12.2023</time>
+											</p>
+											<p class="item-blog__more">Read more</p>
+										</div>
+									</a>
+								</article>
+							</div>
+						</div>
+						<div class="swiper-scrollbar"></div>
+					</div>
+				</div>
+			</section>
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
+				<div class="footer__top">
+					<a href="index.html" class="footer__logo" aria-label="link to main page">
+						<img src="img/icons/logo.svg" width="200" height="600" alt="Image">
+					</a>
+					<ul class="footer__list">
+						<li class="footer__item">
+							<a href="#" class="footer__social" aria-label="link to social">
+								<img src="img/icons/youtube-2.svg" width="60" height="60" alt="Image">
+							</a>
+						</li>
+						<li class="footer__item">
+							<a href="#" class="footer__social" aria-label="link to social">
+								<img src="img/icons/facebook.svg" width="60" height="60" alt="Image">
+							</a>
+						</li>
+						<li class="footer__item">
+							<a href="#" class="footer__social" aria-label="link to social">
+								<img src="img/icons/tiktok.svg" width="60" height="60" alt="Image">
+							</a>
+						</li>
+						<li class="footer__item">
+							<a href="#" class="footer__social" aria-label="link to social">
+								<img src="img/icons/instagram.svg" width="60" height="60" alt="Image">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer__btm">
+					<p class="footer__rights">
+						2024 © All rights reserved
+					</p>
+					<div class="footer__links">
+						<a href="#" class="footer__link" aria-label="link to privacy policy page">Privacy policy</a>
+						<a href="#" class="footer__link" aria-label="link to terms of use page">Terms of use</a>
+					</div>
+				</div>
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20240909231009"></script>
+	<script src="js/app.min.js?_v=20240910193021"></script>
 </body>
 
 </html>

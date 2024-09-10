@@ -1,3 +1,112 @@
-//====================================================================================================
+.footer {
+  background-color: $orange;
+  @include adaptiveValue("padding-top", 100, 60);
+  @include adaptiveValue("padding-bottom", 100, 60);
+  // .footer__container
+  &__container {
+  }
+  &__top,
+  &__btm {
+    display: grid;
+    gap: toRem(60);
+    @media (min-width: toEm(650.98)){
+      grid-template-columns: toRem(200) 1fr toRem(270);
+    }
+    @media (max-width:toEm(650.98)){
+       grid-template-columns: 100%; 
+    }
+  }
+  // .footer__top
+  &__top {
+    @media (min-width:toEm(650.98)){
+      margin-bottom: toRem(18);
+    }
+    @media (max-width:toEm(650.98)){
+      margin-bottom: toRem(40);        
+    }
+  }
+  // .footer__logo
+  &__logo {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  // .footer__list
+  &__list {
+    display: flex;
+    gap: toRem(11);
+    @media (min-width: toEm(650.98)){
+      justify-content: flex-end;
+      grid-column: 3/4;
+    }
+  }
+  // .footer__item
+  &__item {
+    width: 100%;
+  }
+  // .footer__social
+  &__social {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1/1;
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color .3s ease;
+    @media (any-hover: hover){
+      &:hover{
+        background-color:$purple;
+      }
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  // .footer__btm
+  &__btm {
+    font-weight: 500;
+    @media (min-width:toEm(650.98)){
+      font-size: toRem(18);
+    }
+    @media (max-width:toEm(650.98)){
+      font-size: toRem(28);
+    }
+  }
+  &__rights,
+  &__link {
+    color: rgba(255,255,255,0.7);
+  }
+  // .footer__rights
+  &__rights {
+    @media (max-width: toEm(650.98)){
+        order: 2;
+    }
+  }
+  // .footer__links
+  &__links {
+    display: flex;
+    gap: toRem(20);
+    @media (min-width: toEm(650.98)){
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      grid-column: 3/4;
+    }
+    @media (max-width: toEm(650.98)){
+      order: 1;
+      flex-direction: column;
+    }
+  }
+  // .footer__link
+  &__link {
+    transition: color .3s ease;
+    @media (any-hover: hover){
+      &:hover{
+        color: $purple;
+      }
+    }
+  }
+}
 
-//====================================================================================================
+
+

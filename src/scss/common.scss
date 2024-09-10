@@ -50,25 +50,35 @@ body {
 
 
 %sectionPddTB {
-  // margin-top: toRem(-132);
-  @include adaptiveValue("margin-top", -132, -50);
   @include adaptiveValue("padding-top", 180, 95);
   @include adaptiveValue("padding-bottom", 230, 95);
+  @media (min-width:$mobile){
+     margin-top: toRem(-132); 
+  }
+  @media (max-width:$mobile){
+      margin-top: toRem(-38);
+  }
 }
 %left-Right-up {
-  @media (min-width:$mobile) {
-    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+  @media (min-width:toEm(1024.98)) {
+    clip-path: polygon(0 130px, 100% 0, 100% 100%, 0 100%);
+  }
+  @media (max-width:toEm(1024.98)) and (min-width:$mobile) {
+    clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
   }
   @media (max-width:$mobile) {
-    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);
   }
 }
 %left-Right-dwn {
-  @media (min-width:$mobile) {
-    clip-path: polygon(0 0%, 100% 10%, 100% 100%, 0 100%);
+  @media (min-width:toEm(1024.98)) {
+    clip-path: polygon(0 0%, 100% 130px, 100% 100%, 0 100%);
+  }
+  @media (max-width:toEm(1024.98)) and (min-width:$mobile) {
+    clip-path: polygon(0 0%, 100% 80px, 100% 100%, 0 100%);
   }
   @media (max-width:$mobile) {
-    clip-path: polygon(0 0%, 100% 3%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0%, 100% 35px, 100% 100%, 0 100%);
   }
 }
 
@@ -127,3 +137,4 @@ body {
     }
   }
 }
+

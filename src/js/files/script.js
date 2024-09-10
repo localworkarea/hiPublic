@@ -9,66 +9,84 @@ import { flsModules } from "./modules.js";
 // 2. Вставить следующий код в скрипт
 // 3. Настройка плавного скролла будет осуществляться в изменении параметров в вызове функции smoothScroll(0.08, 0.85);
 
-function smoothScroll(smoothness = 0.1, inertia = 0.9) {
-  let scrollPosition = window.pageYOffset; // Текущая позиция скролла
-  let targetPosition = scrollPosition; // Целевая позиция скролла
-  let isScrolling = false; // Флаг для отслеживания состояния скролла
-  let isDraggingScrollbar = false; // Флаг для отслеживания состояния перетаскивания ползунка
+function smoothScroll(smoothness = 0.08, inertia = 0.85) {
+  let scrollPosition = window.pageYOffset;
+  let targetPosition = scrollPosition;
+  let isScrolling = false;
+  let isDraggingScrollbar = false;
 
   function updateScroll() {
-    // Рассчитываем смещение
-    scrollPosition += (targetPosition - scrollPosition) * smoothness;
+      scrollPosition += (targetPosition - scrollPosition) * smoothness;
+      window.scrollTo(0, scrollPosition);
 
-    // Обновляем скролл окна
-    window.scrollTo(0, scrollPosition);
-
-    // Проверяем, нужно ли продолжать анимацию
-    if (Math.abs(targetPosition - scrollPosition) > 0.5) {
-      requestAnimationFrame(updateScroll);
-    } else {
-      isScrolling = false; // Останавливаем анимацию
-    }
+      if (Math.abs(targetPosition - scrollPosition) > 0.5) {
+          requestAnimationFrame(updateScroll);
+      } else {
+          isScrolling = false;
+      }
   }
 
-  // Отслеживаем прокрутку мышью или точпадом
-  window.addEventListener('wheel', function(event) {
-    if (!isDraggingScrollbar) {
-      targetPosition += event.deltaY; // Обновляем целевую позицию
+  function startScroll(event) {
+      if (!isDraggingScrollbar) {
+          targetPosition += event.deltaY * inertia;
+          targetPosition = Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, targetPosition));
+          event.preventDefault();
 
-      // Ограничиваем целевую позицию в пределах документа
-      targetPosition = Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, targetPosition));
-
-      event.preventDefault(); // Предотвращаем стандартное поведение скролла
-
-      // Если не прокручивается, запускаем анимацию
-      if (!isScrolling) {
-        isScrolling = true;
-        requestAnimationFrame(updateScroll);
+          if (!isScrolling) {
+              isScrolling = true;
+              requestAnimationFrame(updateScroll);
+          }
       }
-    }
-  }, { passive: false });
+  }
 
-  // Отслеживаем начало и конец перетаскивания ползунка скроллбара
-  window.addEventListener('scroll', function() {
-    if (!isScrolling) {
+  function onScroll() {
+      if (!isScrolling) {
+          scrollPosition = window.pageYOffset;
+          targetPosition = scrollPosition;
+      }
+  }
+
+  function onMouseDown() {
+      isDraggingScrollbar = true;
+  }
+
+  function onMouseUp() {
+      isDraggingScrollbar = false;
       scrollPosition = window.pageYOffset;
       targetPosition = scrollPosition;
-    }
+  }
+
+  function initSmoothScroll() {
+      if (document.body.getAttribute('data-smooth-scroll') === 'true') {
+          window.addEventListener('wheel', startScroll, { passive: false });
+          window.addEventListener('scroll', onScroll);
+          window.addEventListener('mousedown', onMouseDown);
+          window.addEventListener('mouseup', onMouseUp);
+      } else {
+          window.removeEventListener('wheel', startScroll);
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('mousedown', onMouseDown);
+          window.removeEventListener('mouseup', onMouseUp);
+      }
+  }
+
+  const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'data-smooth-scroll') {
+              initSmoothScroll();
+          }
+      });
   });
 
-  window.addEventListener('mousedown', function() {
-    isDraggingScrollbar = true;
-  });
+  observer.observe(document.body, { attributes: true });
 
-  window.addEventListener('mouseup', function() {
-    isDraggingScrollbar = false;
-    scrollPosition = window.pageYOffset;
-    targetPosition = scrollPosition;
-  });
+  initSmoothScroll();
 }
 
 if (document.body.getAttribute('data-smooth-scroll') === 'true') {
   smoothScroll(0.08, 0.85);
 }
+
+
 
 // ========================================================
