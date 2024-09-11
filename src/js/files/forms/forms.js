@@ -220,6 +220,20 @@ export function formSubmit() {
 				popup ? flsModules.popup.open(popup) : null;
 			}
 		}, 0);
+
+			const formContacts = document.querySelector('.form-contacts');
+			// Додаємо клас '_form-sent'
+			form.classList.add('_form-sent');
+			if (formContacts) {
+				formContacts.classList.add('_form-sent');
+			}
+			// Удаляем класс '_form-sent' через 10 секунд
+			setTimeout(() => {
+					form.classList.remove('_form-sent');
+					if (formContacts) {
+						formContacts.classList.remove('_form-sent');
+					}
+			}, 5000);
 		// Очищуємо форму
 		formValidate.formClean(form);
 		// Повідомляємо до консолі

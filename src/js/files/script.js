@@ -84,7 +84,7 @@ function smoothScroll(smoothness = 0.08, inertia = 0.85) {
 }
 
 if (document.body.getAttribute('data-smooth-scroll') === 'true') {
-  smoothScroll(0.08, 0.85);
+  smoothScroll(0.08, 0.9);
 }
 
 

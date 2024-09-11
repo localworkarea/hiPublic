@@ -5,7 +5,9 @@
 	})
 	<body data-smooth-scroll="true">
 		<div class="wrapper">
-			@@include('html/_header.htm',{})
+			@@include('html/_header.htm',{
+				"forheader": "home-header"
+			})
 			<main class="page">
 				<section class="hero">
 					<div class="hero__bg">
@@ -60,7 +62,7 @@
 						</ul>
 					</div>
 				</section>
-				<section class="advantages sec-wht">
+				<section class="advantages sec-wht cut-ltr pb-big">
 					<div class="advantages__container">
 						<h2 class="advantages__title title-main">
 							Advantages
@@ -93,7 +95,7 @@
 						</ul>
 					</div>
 				</section>
-				<section class="influencers sec-prp">
+				<section class="influencers sec-prp cut-rtl pb-big">
 					<div class="influencers__container">
 						<h2 class="influencers__title title-main">
 							influencers
@@ -250,7 +252,7 @@
 						</div>
 					</div>
 				</section>
-				<section class="partners sec-org">
+				<section class="partners sec-org cut-ltr pb-big">
 					<div class="partners__container">
 						<h2 class="partners__title title-main">
 							Partners
@@ -283,7 +285,112 @@
 						</ul>
 					</div>
 				</section>
-				<section class="team sec-wht">
+				<section class="cases sec-wht cut-ltr pb-sm">
+					<div class="cases__container">
+						<h2 class="cases__title title-main">
+							Cases
+						</h2>
+					</div>
+					<div data-showmore="items" data-showmore-media="550,max" class="cases__body">
+						<ul data-showmore-content="4" class="cases__list">
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-1.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-2.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-3.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-4.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-5.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-6.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-7.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+							<li class="cases__item">
+								<img loading="lazy" class="ibg" src="@img/cases/cases-8.jpg" width="360" height="360" alt="Image">
+								<div class="cases__wr">
+									<p class="cases__sub-title">
+										<span>VTuber Awards wins<br> Webby Award</span>
+									</p>
+									<p class="cases__txt">
+										<span>This year, the VTuber Awards 2023 was selected as a Webby People’s Voice Winner</span>
+									</p>
+								</div>
+							</li>
+						</ul>
+						<div class="cases__footer">
+							<button hidden data-showmore-button type="button" class="cases__more btn btn--one" aria-label="button to show more">
+								<span>Show more cases</span>
+								<span>Show less cases</span>
+							</button>
+						</div>
+					</div>
+				</section>
+				<section class="team sec-wht pb-big">
 					<div class="team__container">
 						<h2 class="team__title title-main">
 							Our Team
@@ -328,7 +435,7 @@
 						</ul>
 					</div>
 				</section>
-				<section class="blog sec-prp">
+				<section class="blog sec-prp cut-rtl pb-sm">
 					<div class="blog__container">
 						<h2 class="blog__title title-main">
 							Blog
@@ -475,6 +582,9 @@
 								</div>
 							</div>
 							<div class="swiper-scrollbar"></div>
+						</div>
+						<div class="influencers__more">
+							<a href="blog.html" class="influencers__btn btn btn--one" aria-label="link to the blog page">All articles</a>
 						</div>
 					</div>
 				</section>

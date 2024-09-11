@@ -4,10 +4,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: toRem(20);
-  padding-bottom: toRem(20);
+  background-color: $purple;
+  @media (min-width:$mobileSmall){
+    padding-top: toRem(20);
+    padding-bottom: toRem(20);
+  }
+  @media (max-width:$mobileSmall){
+    padding-top: toRem(10);
+    padding-bottom: toRem(10);
+  }
   &.home-header {
     position: absolute;
+    background-color: transparent;
   }
   // .header__wrapper
   &__wrapper {
@@ -114,6 +122,9 @@
   // .menu__item
   &__item {
     overflow: hidden;
+    &:not(:last-child) {
+      margin-bottom: toRem(10);
+    }
     &:nth-child(1) {
       .menu__link-wr {
         .menu-open & {

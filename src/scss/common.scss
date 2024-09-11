@@ -48,18 +48,36 @@ body {
   }
 }
 
+.page {
+  background-color: #fff;
+}
 
 %sectionPddTB {
-  @include adaptiveValue("padding-top", 180, 95);
-  @include adaptiveValue("padding-bottom", 230, 95);
-  @media (min-width:$mobile){
-     margin-top: toRem(-132); 
-  }
-  @media (max-width:$mobile){
-      margin-top: toRem(-38);
-  }
+  // @include adaptiveValue("padding-top", 100, 60);
+  // @include adaptiveValue("padding-bottom", 100, 60);
+  // @include adaptiveValue("padding-top", 180, 95);
+  // @include adaptiveValue("padding-bottom", 230, 95);
+//   @media (min-width:$mobile){
+//     margin-top: toRem(-132); 
+//  }
+//  @media (max-width:$mobile){
+//      margin-top: toRem(-38);
+//  }
 }
-%left-Right-up {
+
+.cut-ltr,
+.cut-rtl {
+  @include adaptiveValue("padding-top", 180, 95);
+  // @include adaptiveValue("padding-bottom", 230, 95);
+  @media (min-width:$mobile){
+    margin-top: toRem(-132); 
+ }
+ @media (max-width:$mobile){
+     margin-top: toRem(-38);
+ }
+}
+
+.cut-ltr {
   @media (min-width:toEm(1024.98)) {
     clip-path: polygon(0 130px, 100% 0, 100% 100%, 0 100%);
   }
@@ -70,7 +88,7 @@ body {
     clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);
   }
 }
-%left-Right-dwn {
+.cut-rtl {
   @media (min-width:toEm(1024.98)) {
     clip-path: polygon(0 0%, 100% 130px, 100% 100%, 0 100%);
   }
@@ -82,11 +100,43 @@ body {
   }
 }
 
+.pb-sm {
+  @include adaptiveValue("padding-bottom", 100, 60);
+}
+.pb-big {
+  @include adaptiveValue("padding-bottom", 230, 95);
+}
+
+// %left-Right-up {
+//   @media (min-width:toEm(1024.98)) {
+//     clip-path: polygon(0 130px, 100% 0, 100% 100%, 0 100%);
+//   }
+//   @media (max-width:toEm(1024.98)) and (min-width:$mobile) {
+//     clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+//   }
+//   @media (max-width:$mobile) {
+//     clip-path: polygon(0 35px, 100% 0, 100% 100%, 0 100%);
+//   }
+// }
+// %left-Right-dwn {
+//   @media (min-width:toEm(1024.98)) {
+//     clip-path: polygon(0 0%, 100% 130px, 100% 100%, 0 100%);
+//   }
+//   @media (max-width:toEm(1024.98)) and (min-width:$mobile) {
+//     clip-path: polygon(0 0%, 100% 80px, 100% 100%, 0 100%);
+//   }
+//   @media (max-width:$mobile) {
+//     clip-path: polygon(0 0%, 100% 35px, 100% 100%, 0 100%);
+//   }
+// }
+
 .title-main {
   font-weight: 900;
   text-transform: uppercase;
   margin-bottom: toRem(30);
-  @include adaptiveValue("font-size", 144, 102,2,1440.98,389.98);
+  word-wrap: break-word;
+  @include adaptiveValue("font-size", 144, 100,2,1440.98,389.98);
+  
   @media (max-width: toEm(389.98)) and (min-width: toEm(360.98)) {
       font-size: toRem(90);
   }
@@ -116,6 +166,9 @@ body {
 .clr-pr {
   color: $purple
 }
+.clr-wht {
+  color: #fff;
+}
 
 .btn {
   display: grid;
@@ -137,4 +190,137 @@ body {
     }
   }
 }
+
+
+.breadcrumb {
+  position: relative;
+  z-index: 2;
+  min-height: toRem(60);
+  padding: toRem(15) 0;
+  display: flex;
+  align-items: center;
+  border-bottom: toRem(1) solid rgba(0,0,0,0.1);
+  .articles & {
+    border-color: rgba(255,255,255,.2);
+  }
+  @media (min-width:$mobileSmall){
+    margin-top: toRem(100);
+  }
+  @media (max-width:$mobileSmall){
+    margin-top: toRem(70);
+  }
+  // .breadcrumb__list
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  // .breadcrumb__item
+  &__item {
+    font-weight: 500;
+    font-size: toRem(16);
+    color: rgba(0,0,0,0.3);
+    .articles & {
+      color: rgba(255,255,255,.2);
+    }
+    a {
+      transition: color .3s ease;
+      @media (any-hover: hover){
+        &:hover{
+          color: #000;  
+          .articles & {
+            color: rgba(255,255,255,1);
+          } 
+        }
+      }
+
+    }
+    &:first-child {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      a {
+        width: toRem(30);
+        aspect-ratio: 1/1;
+        display: grid;
+        place-items: center;
+        border-radius: toRem(3);
+        transition: background-color .3s ease;
+        @media (any-hover: hover){
+          &:hover{
+            background-color: rgba(0,0,0,0.2);
+            svg {
+              path {
+                fill: rgba(0,0,0,1);
+                .articles & {
+                  fill: rgba(255,255,255,1);
+                }
+              }
+            }
+            .articles & {
+              background-color: rgba(255,255,255,0.2);
+            }
+          }
+        }
+        svg {
+          path {
+            fill: rgba(0,0,0,0.7);
+            transition: fill .3s ease;
+            .articles & {
+              fill: rgba(255,255,255,.5);
+            }
+          }
+        }
+      }
+    }
+
+    &:not(:last-child) {
+      &::after {
+        content:'';
+        margin-left: 5px;
+        background-image: url('../img/icons/arr-bread.svg');
+        background-repeat: no-repeat;
+        background-size:contain;
+        width: toRem(10);
+        height: toRem(12);
+        .articles & {
+          background-image: url('../img/icons/arr-bread-fff.svg');
+          opacity: .7;
+        }
+      }
+    }
+  }
+}
+
+
+.head-art {
+  position: relative;
+  padding-bottom: toRem(40);
+  overflow: hidden;
+  &::before {
+    content:'';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(33, 0, 32, 0.3);
+  }
+  // .head-art__bg
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  // .head-art__container
+  &__container {
+    position: relative;
+    z-index: 2;
+    margin-top: toRem(30);
+  }
+  // .head-art__title
+  &__title {
+  }
+}
+
 
