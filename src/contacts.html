@@ -5,27 +5,9 @@
 	})
 	<body data-smooth-scroll="true">
 		<div class="wrapper">
-			<header class="header">
-				<div class="header__wrapper">
-					<button type="button" class="header__icon icon-menu" aria-label="open menu">
-						<span class="icon-menu__item">
-							<span></span>
-						</span>
-					</button>
-					<a href="index.html" class="header__logo">
-						<img src="@img/icons/logo.svg" width="200" height="60" alt="logo HiPUBLIC">
-					</a>
-					<a href="contacts.html" data-da=".menu,768.98,last" class="header__contacts btn btn--one">Contacts us</a>
-					<nav class="header__menu menu">
-						<ul class="menu__list">
-							<li class="menu__item"><div class="menu__link-wr"><a href="#" data-goto-top="30" data-goto="index.html#what" class="menu__link">What we do</a></div></li>
-							<li class="menu__item"><div class="menu__link-wr"><a href="#" data-goto-top="30" data-goto="index.html#advantages" class="menu__link">Advantages</a></div></li>
-							<li class="menu__item"><div class="menu__link-wr"><a href="#" data-goto-top="30" data-goto="index.html#influencers" class="menu__link">Influencers</a></div></li>
-							<li class="menu__item"><div class="menu__link-wr"><a href="#" data-goto-top="30" data-goto="index.html#team" class="menu__link">Our team</a></div></li>
-						</ul>
-					</nav>
-				</div>
-			</header>
+			@@include('html/_header-all.htm',{
+			
+			})
 			<main class="page">
 				<section class="contacts">
 					<div class="breadcrumb">
