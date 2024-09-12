@@ -4154,6 +4154,109 @@
         window.addEventListener("load", (function(e) {
             initSliders();
         }));
+        class ScrollWatcher {
+            constructor(props) {
+                let defaultConfig = {
+                    logging: true
+                };
+                this.config = Object.assign(defaultConfig, props);
+                this.observer;
+                !document.documentElement.classList.contains("watcher") ? this.scrollWatcherRun() : null;
+            }
+            scrollWatcherUpdate() {
+                this.scrollWatcherRun();
+            }
+            scrollWatcherRun() {
+                document.documentElement.classList.add("watcher");
+                this.scrollWatcherConstructor(document.querySelectorAll("[data-watch]"));
+            }
+            scrollWatcherConstructor(items) {
+                if (items.length) {
+                    this.scrollWatcherLogging(`Прокинувся, стежу за об'єктами (${items.length})...`);
+                    let uniqParams = uniqArray(Array.from(items).map((function(item) {
+                        if (item.dataset.watch === "navigator" && !item.dataset.watchThreshold) {
+                            let valueOfThreshold;
+                            if (item.clientHeight > 2) {
+                                valueOfThreshold = window.innerHeight / 2 / (item.clientHeight - 1);
+                                if (valueOfThreshold > 1) valueOfThreshold = 1;
+                            } else valueOfThreshold = 1;
+                            item.setAttribute("data-watch-threshold", valueOfThreshold.toFixed(2));
+                        }
+                        return `${item.dataset.watchRoot ? item.dataset.watchRoot : null}|${item.dataset.watchMargin ? item.dataset.watchMargin : "0px"}|${item.dataset.watchThreshold ? item.dataset.watchThreshold : 0}`;
+                    })));
+                    uniqParams.forEach((uniqParam => {
+                        let uniqParamArray = uniqParam.split("|");
+                        let paramsWatch = {
+                            root: uniqParamArray[0],
+                            margin: uniqParamArray[1],
+                            threshold: uniqParamArray[2]
+                        };
+                        let groupItems = Array.from(items).filter((function(item) {
+                            let watchRoot = item.dataset.watchRoot ? item.dataset.watchRoot : null;
+                            let watchMargin = item.dataset.watchMargin ? item.dataset.watchMargin : "0px";
+                            let watchThreshold = item.dataset.watchThreshold ? item.dataset.watchThreshold : 0;
+                            if (String(watchRoot) === paramsWatch.root && String(watchMargin) === paramsWatch.margin && String(watchThreshold) === paramsWatch.threshold) return item;
+                        }));
+                        let configWatcher = this.getScrollWatcherConfig(paramsWatch);
+                        this.scrollWatcherInit(groupItems, configWatcher);
+                    }));
+                } else this.scrollWatcherLogging("Сплю, немає об'єктів для стеження. ZzzZZzz");
+            }
+            getScrollWatcherConfig(paramsWatch) {
+                let configWatcher = {};
+                if (document.querySelector(paramsWatch.root)) configWatcher.root = document.querySelector(paramsWatch.root); else if (paramsWatch.root !== "null") this.scrollWatcherLogging(`Эмм... батьківського об'єкта ${paramsWatch.root} немає на сторінці`);
+                configWatcher.rootMargin = paramsWatch.margin;
+                if (paramsWatch.margin.indexOf("px") < 0 && paramsWatch.margin.indexOf("%") < 0) {
+                    this.scrollWatcherLogging(`йой, налаштування data-watch-margin потрібно задавати в PX або %`);
+                    return;
+                }
+                if (paramsWatch.threshold === "prx") {
+                    paramsWatch.threshold = [];
+                    for (let i = 0; i <= 1; i += .005) paramsWatch.threshold.push(i);
+                } else paramsWatch.threshold = paramsWatch.threshold.split(",");
+                configWatcher.threshold = paramsWatch.threshold;
+                return configWatcher;
+            }
+            scrollWatcherCreate(configWatcher) {
+                console.log(configWatcher);
+                this.observer = new IntersectionObserver(((entries, observer) => {
+                    entries.forEach((entry => {
+                        this.scrollWatcherCallback(entry, observer);
+                    }));
+                }), configWatcher);
+            }
+            scrollWatcherInit(items, configWatcher) {
+                this.scrollWatcherCreate(configWatcher);
+                items.forEach((item => this.observer.observe(item)));
+            }
+            scrollWatcherIntersecting(entry, targetElement) {
+                if (entry.isIntersecting) {
+                    !targetElement.classList.contains("_watcher-view") ? targetElement.classList.add("_watcher-view") : null;
+                    this.scrollWatcherLogging(`Я бачу ${targetElement.classList}, додав клас _watcher-view`);
+                } else {
+                    targetElement.classList.contains("_watcher-view") ? targetElement.classList.remove("_watcher-view") : null;
+                    this.scrollWatcherLogging(`Я не бачу ${targetElement.classList}, прибрав клас _watcher-view`);
+                }
+            }
+            scrollWatcherOff(targetElement, observer) {
+                observer.unobserve(targetElement);
+                this.scrollWatcherLogging(`Я перестав стежити за ${targetElement.classList}`);
+            }
+            scrollWatcherLogging(message) {
+                this.config.logging ? FLS(`[Спостерігач]: ${message}`) : null;
+            }
+            scrollWatcherCallback(entry, observer) {
+                const targetElement = entry.target;
+                this.scrollWatcherIntersecting(entry, targetElement);
+                targetElement.hasAttribute("data-watch-once") && entry.isIntersecting ? this.scrollWatcherOff(targetElement, observer) : null;
+                document.dispatchEvent(new CustomEvent("watcherCallback", {
+                    detail: {
+                        entry
+                    }
+                }));
+            }
+        }
+        flsModules.watcher = new ScrollWatcher({});
         let addWindowScrollEvent = false;
         function pageNavigation() {
             document.addEventListener("click", pageNavigationAction);
@@ -4184,6 +4287,32 @@
                 if (document.querySelector(`#${getHash()}`)) goToHash = `#${getHash()}`; else if (document.querySelector(`.${getHash()}`)) goToHash = `.${getHash()}`;
                 goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
             }
+        }
+        function headerScroll() {
+            addWindowScrollEvent = true;
+            const header = document.querySelector("header.header");
+            const headerShow = header.hasAttribute("data-scroll-show");
+            const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
+            const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
+            let scrollDirection = 0;
+            let timer;
+            document.addEventListener("windowScroll", (function(e) {
+                const scrollTop = window.scrollY;
+                clearTimeout(timer);
+                if (scrollTop >= startPoint) {
+                    !header.classList.contains("_header-scroll") ? header.classList.add("_header-scroll") : null;
+                    if (headerShow) {
+                        if (scrollTop > scrollDirection) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null; else !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
+                        timer = setTimeout((() => {
+                            !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
+                        }), headerShowTimer);
+                    }
+                } else {
+                    header.classList.contains("_header-scroll") ? header.classList.remove("_header-scroll") : null;
+                    if (headerShow) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null;
+                }
+                scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
+            }));
         }
         setTimeout((() => {
             if (addWindowScrollEvent) {
@@ -4338,6 +4467,189 @@
             initSmoothScroll();
         }
         if (document.body.getAttribute("data-smooth-scroll") === "true") smoothScroll(.08, .9);
+        document.addEventListener("DOMContentLoaded", (function() {
+            gsap.registerPlugin(ScrollTrigger);
+            const splitTextLines = document.querySelectorAll(".split-lines");
+            const splitTextWords = document.querySelectorAll(".split-words");
+            const splitTextChars = document.querySelectorAll(".split-chars");
+            const splitTextBoth = document.querySelectorAll(".split-both");
+            const splitSetSpan = document.querySelectorAll(".split-words.set-span");
+            function initSplitType() {
+                if (splitTextLines.length > 0) splitTextLines.forEach((element => {
+                    new SplitType(element, {
+                        types: "lines"
+                    });
+                }));
+                if (splitTextWords.length > 0) splitTextWords.forEach((element => {
+                    new SplitType(element, {
+                        types: "words"
+                    });
+                    const words = element.querySelectorAll(".word");
+                    words.forEach(((word, index) => {
+                        word.style.setProperty("--index", index);
+                    }));
+                }));
+                if (splitTextChars.length > 0) splitTextChars.forEach((element => {
+                    new SplitType(element, {
+                        types: "chars"
+                    });
+                    const chars = element.querySelectorAll(".char");
+                    chars.forEach(((char, index) => {
+                        char.style.setProperty("--index", index);
+                    }));
+                }));
+                if (splitTextBoth.length > 0) splitTextBoth.forEach((element => {
+                    new SplitType(element, {
+                        types: "lines, words"
+                    });
+                    const words = element.querySelectorAll(".word");
+                    words.forEach(((word, index) => {
+                        word.style.setProperty("--index", index);
+                    }));
+                }));
+                if (splitSetSpan.length > 0) splitSetSpan.forEach((splitSetSpan => {
+                    const words = splitSetSpan.querySelectorAll(".word");
+                    words.forEach((word => {
+                        const text = word.textContent.trim();
+                        word.innerHTML = `<span class="word-span">${text}</span>`;
+                    }));
+                }));
+            }
+            initSplitType();
+            const resizeObserver = new ResizeObserver((entries => {
+                entries.forEach((entry => {
+                    initSplitType();
+                }));
+                updateMargin();
+            }));
+            resizeObserver.observe(document.body);
+            function updateMargin() {
+                const main = document.querySelector(".page");
+                const footer = document.querySelector(".footer");
+                if (main && footer) {
+                    const footerHeight = footer.offsetHeight;
+                    main.style.marginBottom = `${footerHeight}px`;
+                }
+            }
+            function updateAnimation() {
+                const main = document.querySelector(".page");
+                const lastSection = main.lastElementChild;
+                const footer = document.querySelector(".footer");
+                const footerHeight = footer.offsetHeight;
+                clearSpecificScrollTriggers();
+                gsap.set(footer, {
+                    yPercent: 60,
+                    opacity: 0,
+                    immediateRender: true
+                });
+                gsap.to(footer, {
+                    yPercent: 0,
+                    opacity: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: lastSection,
+                        start: "bottom bottom",
+                        end: `+=${footerHeight}`,
+                        scrub: true,
+                        immediateRender: false
+                    }
+                });
+                const heroSection = document.querySelector(".hero");
+                const heroWrapper = document.querySelector(".hero__wrapper");
+                if (heroSection) gsap.to(heroWrapper, {
+                    yPercent: 30,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+                const influencerSection = document.querySelector(".influencers");
+                const influencerTitle = document.querySelectorAll(".influencers__title");
+                const influencerWords = document.querySelectorAll(".influencers__title span");
+                const influencerContainer = document.querySelector(".influencers__container");
+                if (influencerSection) {
+                    gsap.set(influencerSection, {
+                        scale: .8,
+                        immediateRender: true
+                    });
+                    gsap.to(influencerSection, {
+                        scale: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: influencerSection,
+                            start: "top bottom",
+                            end: "top 80%",
+                            scrub: 1,
+                            immediateRender: false
+                        }
+                    });
+                    gsap.set(influencerWords, {
+                        transform: "translate(0%, 100%)"
+                    });
+                    gsap.to(influencerWords, {
+                        transform: "translate(0%, 0%)",
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: influencerTitle,
+                            start: "top bottom",
+                            end: "top center",
+                            scrub: true
+                        }
+                    });
+                    gsap.to(influencerContainer, {
+                        transform: "translate(0%, -100px)",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: influencerContainer,
+                            start: "bottom bottom",
+                            end: "bottom top",
+                            scrub: 1
+                        }
+                    });
+                }
+                const partnersSection = document.querySelector(".partners");
+                const partnersContainer = document.querySelector(".partners__container");
+                if (partnersSection) gsap.to(partnersContainer, {
+                    transform: "translate(0%, -100px)",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: partnersContainer,
+                        start: "top center",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+                const teamSection = document.querySelector(".team");
+                const teamContainer = document.querySelector(".team__container");
+                if (teamSection) gsap.to(teamContainer, {
+                    transform: "translate(0%, -100px)",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: teamContainer,
+                        start: "top center",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+            }
+            function clearSpecificScrollTriggers() {
+                ScrollTrigger.getAll().forEach((trigger => trigger.kill()));
+                ScrollTrigger.refresh();
+            }
+            function callAfterResize(func, delay) {
+                let dc = gsap.delayedCall(delay || .2, func).pause(), handler = () => dc.restart(true);
+                window.addEventListener("resize", handler);
+                return handler;
+            }
+            updateMargin();
+            updateAnimation();
+            callAfterResize((() => {
+                updateAnimation();
+            }));
+        }));
         window["FLS"] = false;
         isWebp();
         addLoadedClass();
@@ -4349,5 +4661,6 @@
         });
         formSubmit();
         pageNavigation();
+        headerScroll();
     })();
 })();

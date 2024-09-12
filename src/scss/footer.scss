@@ -1,4 +1,10 @@
 .footer {
+  transform: translateY(0%);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 0;
+
   background-color: $orange;
   @include adaptiveValue("padding-top", 100, 60);
   @include adaptiveValue("padding-bottom", 100, 60);

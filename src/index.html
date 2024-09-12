@@ -4,70 +4,74 @@
 	"title":"hiPublic | HOME"
 	})
 	<body data-smooth-scroll="true">
-		<div class="wrapper">
+		<div class="wrapper main-page">
 			@@include('html/_header.htm',{
 				"forheader": "home-header"
 			})
 			<main class="page">
 				<section class="hero">
-					<div class="hero__bg">
-						<video class="hero__video video-hero-pc ibg ibg--contain" autoplay muted  playsinline >
-							<source  src="files/hero-full-pc.mp4" type="video/mp4" width="1440" height="800">
-						</video>
-						<video class="hero__video video-hero-mb ibg ibg--contain" autoplay muted  playsinline >
-							<source src="files/hero-full-mb.mp4" type="video/mp4" width="390" height="670">
-						</video>
-					</div>
-					<div class="hero__container">
-						<div class="hero__about">
-							<p>HiPUBLIC is a global influencer marketing agency focused on innovative solutions and delivering measurable results</p>
+					<div class="hero__wrapper">
+						<div class="hero__bg">
+							<video class="hero__video video-hero-pc ibg" autoplay muted loop playsinline >
+								<source  src="files/original/16x9 clean.mp4" type="video/mp4" width="1440" height="800">
+							</video>
+							<video class="hero__video video-hero-mb ibg" autoplay muted loop playsinline >
+								<source src="files/original/9х16 clean.mp4" type="video/mp4" width="390" height="670">
+							</video>
 						</div>
-						<a href="contacts.html" class="hero__phone btn btn--one" aria-label="link to contacts page">Contact us</a>
+						<div class="hero__container">
+							<div class="hero__about">
+								<p>HiPUBLIC is a global influencer marketing agency focused on innovative solutions and delivering measurable results</p>
+							</div>
+							<a href="contacts.html" class="hero__phone btn btn--one" aria-label="link to contacts page">
+								<span class="split-chars">Contact us</span>
+							</a>
+						</div>
 					</div>
 				</section>
 				<section class="what sec-org">
 					<div class="what__container">
-						<h2 class="what__title title-main">What we do</h2>
-						<ul class="what__items">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="what__title title-main split-both">What we do</h2>
+						<ul data-watch-threshold="0.3"  data-watch class="what__items">
 							<li class="what__item">
 								<div class="what__icon">
 									<img src="@img/icons/magic-wand.svg" width="60" height="60" alt="Image">
 								</div>
-								<p>At HiPUBLIC, we're the wizards of influencer marketing, casting spells worldwide!</p>
+								<p><span>At HiPUBLIC, we're the wizards of influencer marketing, casting spells worldwide!</span></p>
 							</li>
 							<li class="what__item">
 								<div class="what__icon">
 									<img src="@img/icons/chart-data-outline.svg" width="60" height="60" alt="Image">
 								</div>
-								<p>We analyze performance data like pros to refine strategies and boost returns</p>
+								<p><span>We analyze performance data like pros to refine strategies and boost returns</span></p>
 							</li>
 							<li class="what__item">
 								<div class="what__icon">
 									<img src="@img/icons/file-success.svg" width="60" height="60" alt="Image">
 								</div>
-								<p>We vibe with your brand's needs, delivering sharp solutions that guarantee success</p>
+								<p><span>We vibe with your brand's needs, delivering sharp solutions that guarantee success</span></p>
 							</li>
 							<li class="what__item">
 								<div class="what__icon">
 									<img src="@img/icons/cat-with-heart-eyes.svg" width="60" height="60" alt="Image">
 								</div>
-								<p>We design campaigns so engaging, even your cat would give a like!</p>
+								<p><span>We design campaigns so engaging, even your cat would give a like!</span></p>
 							</li>
 							<li class="what__item">
 								<div class="what__icon">
 									<img src="@img/icons/connections-filled.svg" width="60" height="60" alt="Image">
 								</div>
-								<p>We’re the Cupid of brands and influencers, sparking genuine, impactful connections</p>
+								<p><span>We’re the Cupid of brands and influencers, sparking genuine, impactful connections</span></p>
 							</li>
 						</ul>
 					</div>
 				</section>
 				<section class="advantages sec-wht cut-ltr pb-big">
 					<div class="advantages__container">
-						<h2 class="advantages__title title-main">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="advantages__title title-main split-both">
 							Advantages
 						</h2>
-						<ul class="advantages__items">
+						<ul data-watch-threshold="1" data-watch-once  data-watch  class="advantages__items">
 							<li class="advantages__item">
 								<div class="advantages__icon">
 									<img src="@img/icons/portfolio.svg" width="96" height="96" alt="Image">
@@ -98,188 +102,205 @@
 				<section class="influencers sec-prp cut-rtl pb-big">
 					<div class="influencers__container">
 						<h2 class="influencers__title title-main">
-							influencers
+							<span>influencers</span>
 						</h2>
-						<ul class="influencers__list">
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-1.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">AuronPlay</div>
-									<div class="influencers__name">Raúl Álvarez Genes</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+						<ul  class="influencers__list">
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-1.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">AuronPlay</div>
+										<div class="influencers__name">Raúl Álvarez Genes</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-2.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">BishopGP</div>
-									<div class="influencers__name">Elliott Bishop</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-2.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">BishopGP</div>
+										<div class="influencers__name">Elliott Bishop</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-3.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">Ninja</div>
-									<div class="influencers__name">Richard Tyler Blevins</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-3.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">Ninja</div>
+										<div class="influencers__name">Richard Tyler Blevins</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-4.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">Pokimane</div>
-									<div class="influencers__name">Imane Anys</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-4.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">Pokimane</div>
+										<div class="influencers__name">Imane Anys</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-4.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">Pokimane</div>
-									<div class="influencers__name">Imane Anys</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-4.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">Pokimane</div>
+										<div class="influencers__name">Imane Anys</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-1.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">AuronPlay</div>
-									<div class="influencers__name">Raúl Álvarez Genes</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-1.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">AuronPlay</div>
+										<div class="influencers__name">Raúl Álvarez Genes</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-2.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">BishopGP</div>
-									<div class="influencers__name">Elliott Bishop</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-2.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">BishopGP</div>
+										<div class="influencers__name">Elliott Bishop</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-							<li class="influencers__item">
-								<img class="influencers__avatar ibg" src="@img/influencers/influencers-3.jpg" width="200" height="232" alt="Image">
-								<div class="influencers__body">
-									<div class="influencers__title-item">Ninja</div>
-									<div class="influencers__name">Richard Tyler Blevins</div>
-									<div class="influencers__links">
-										<a href="#" class="influencers__link" aria-label="link to instagram">
-											<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to whatsapp">
-											<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
-										</a>
-										<a href="#" class="influencers__link" aria-label="link to youtube">
-											<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
-										</a>
+							<li data-watch-threshold="0.4" data-watch-once  data-watch class="influencers__item">
+								<div class="influencers__wr">
+									<img class="influencers__avatar ibg" src="@img/influencers/influencers-3.jpg" width="200" height="232" alt="Image">
+									<div class="influencers__body">
+										<div class="influencers__title-item">Ninja</div>
+										<div class="influencers__name">Richard Tyler Blevins</div>
+										<div class="influencers__links">
+											<a href="#" class="influencers__link" aria-label="link to instagram">
+												<img src="@img/icons/instagram-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to whatsapp">
+												<img src="@img/icons/social-1.svg" width="16" height="16" alt="Image">
+											</a>
+											<a href="#" class="influencers__link" aria-label="link to youtube">
+												<img src="@img/icons/youtube-1.svg" width="16" height="16" alt="Image">
+											</a>
+										</div>
 									</div>
 								</div>
 							</li>
-						
 						</ul>
 						<div class="influencers__more">
-							<a href="#" class="influencers__btn btn btn--one" aria-label="get more information">Get more information</a>
+							<a href="#" class="influencers__btn btn btn--one" aria-label="get more information">
+								<span class="split-chars">Get more information</span>
+							</a>
 						</div>
 					</div>
 				</section>
 				<section class="partners sec-org cut-ltr pb-big">
 					<div class="partners__container">
-						<h2 class="partners__title title-main">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="partners__title title-main split-both">
 							Partners
 						</h2>
 						<ul class="partners__list">
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-1.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-2.png" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-3.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-4.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-5.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-5.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-5.svg" width="114" height="112" alt="Image">
 							</li>
-							<li class="partners__item">
+							<li data-watch-threshold="0.5" data-watch-once data-watch class="partners__item">
 								<img src="@img/partners/partners-5.svg" width="114" height="112" alt="Image">
 							</li>
 						</ul>
@@ -287,13 +308,13 @@
 				</section>
 				<section class="cases sec-wht cut-ltr pb-sm">
 					<div class="cases__container">
-						<h2 class="cases__title title-main">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="cases__title title-main split-both">
 							Cases
 						</h2>
 					</div>
 					<div data-showmore="items" data-showmore-media="550,max" class="cases__body">
 						<ul data-showmore-content="4" class="cases__list">
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-1.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -304,7 +325,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-2.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -315,7 +336,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-3.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -326,7 +347,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-4.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -337,7 +358,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-5.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -348,7 +369,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-6.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -359,7 +380,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-7.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -370,7 +391,7 @@
 									</p>
 								</div>
 							</li>
-							<li class="cases__item">
+							<li data-watch-threshold="0.1"  data-watch class="cases__item">
 								<img loading="lazy" class="ibg" src="@img/cases/cases-8.jpg" width="360" height="360" alt="Image">
 								<div class="cases__wr">
 									<p class="cases__sub-title">
@@ -392,7 +413,7 @@
 				</section>
 				<section class="team sec-wht pb-big">
 					<div class="team__container">
-						<h2 class="team__title title-main">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="team__title title-main split-both">
 							Our Team
 						</h2>
 						<ul class="team__list">
@@ -437,10 +458,10 @@
 				</section>
 				<section class="blog sec-prp cut-rtl pb-sm">
 					<div class="blog__container">
-						<h2 class="blog__title title-main">
+						<h2 data-watch-threshold="1" data-watch-once  data-watch class="blog__title title-main split-both">
 							Blog
 						</h2>
-						<div class="blog__slider swiper">
+						<div data-watch-threshold="0.5" data-watch  class="blog__slider swiper">
 							<div class="blog__wrapper swiper-wrapper">
 								<div class="blog__slide swiper-slide">
 									<article class="item-blog">
@@ -584,7 +605,9 @@
 							<div class="swiper-scrollbar"></div>
 						</div>
 						<div class="influencers__more">
-							<a href="blog.html" class="influencers__btn btn btn--one" aria-label="link to the blog page">All articles</a>
+							<a href="blog.html" class="influencers__btn btn btn--one" aria-label="link to the blog page">
+								<span class="split-chars">All articles</span>
+							</a>
 						</div>
 					</div>
 				</section>
@@ -592,5 +615,8 @@
 			@@include('html/_footer.htm',{})
 		</div>
 		@@include('html/_js.htm',{})
+		<script src="https://unpkg.com/split-type"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	</body>
 </html>

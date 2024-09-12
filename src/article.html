@@ -270,7 +270,9 @@
 							<div class="swiper-scrollbar"></div>
 						</div>
 						<div class="influencers__more">
-							<a href="blog.html" class="influencers__btn btn btn--one" aria-label="link to the blog page">All articles</a>
+							<a href="blog.html" class="influencers__btn btn btn--one" aria-label="link to the blog page">
+								<span class="split-chars">All articles</span>
+							</a>
 						</div>
 					</div>
 				</section>
@@ -278,5 +280,8 @@
 			@@include('html/_footer.htm',{})
 		</div>
 		@@include('html/_js.htm',{})
+		<script src="https://unpkg.com/split-type"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	</body>
 </html>

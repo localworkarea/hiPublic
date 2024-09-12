@@ -73,7 +73,9 @@
 								<div class="form-contacts__item">
 									<textarea class="input" placeholder="Message"></textarea>
 								</div>
-								<button type="submit" class="form-contacts__send btn btn--one">Call me</button>
+								<button type="submit" class="form-contacts__send btn btn--one">
+									<span class="split-chars">Call me</span>
+								</button>
 							</form>
 							<div class="form-contacts__msg msg-form">
 								<div class="msg-form__body">
@@ -97,5 +99,8 @@
 			@@include('html/_footer.htm',{})
 		</div>
 		@@include('html/_js.htm',{})
+		<script src="https://unpkg.com/split-type"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	</body>
 </html>

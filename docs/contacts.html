@@ -5,12 +5,8 @@
 	<title>hiPublic | CONTACTS</title>
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
-	<style>
-		body {
-			opacity: 0;
-		}
-	</style>
-	<link rel="stylesheet" href="css/style.min.css?_v=20240911220208">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20240912191543">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +24,9 @@
 				<a href="index.html" class="header__logo">
 					<img src="img/icons/logo.svg" width="200" height="60" alt="logo HiPUBLIC">
 				</a>
-				<a href="contacts.html" data-da=".menu,768.98,last" class="header__contacts btn btn--one">Contacts us</a>
+				<a href="contacts.html" data-da=".menu,768.98,last" class="header__contacts btn btn--one">
+					<span class="split-chars">Contacts us</span>
+				</a>
 				<nav class="header__menu menu">
 					<ul class="menu__list">
 						<li class="menu__item">
@@ -112,7 +110,9 @@
 							<div class="form-contacts__item">
 								<textarea class="input" placeholder="Message"></textarea>
 							</div>
-							<button type="submit" class="form-contacts__send btn btn--one">Call me</button>
+							<button type="submit" class="form-contacts__send btn btn--one">
+								<span class="split-chars">Call me</span>
+							</button>
 						</form>
 						<div class="form-contacts__msg msg-form">
 							<div class="msg-form__body">
@@ -174,7 +174,10 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20240911220208"></script>
+	<script src="js/app.min.js?_v=20240912191543"></script>
+	<script src="https://unpkg.com/split-type?_v=20240912191543"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js?_v=20240912191543"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js?_v=20240912191543"></script>
 </body>
 
 </html>
