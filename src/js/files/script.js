@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const footerHeight = footer.offsetHeight;
 
 
-        clearSpecificScrollTriggers();
+        // clearSpecificScrollTriggers();
 
 
         gsap.set(footer, { yPercent: 60, opacity: 0, immediateRender: true });
@@ -312,27 +312,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-     // Функция для удаления триггеров
-     function clearSpecificScrollTriggers() {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        ScrollTrigger.refresh();
-    }
+    //  // Функция для удаления триггеров
+    //  function clearSpecificScrollTriggers() {
+    //     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    //     ScrollTrigger.refresh();
+    // }
 
-    // Функция для вызова обновления после завершения изменения размера
-    function callAfterResize(func, delay) {
-        let dc = gsap.delayedCall(delay || 0.2, func).pause(),
-            handler = () => dc.restart(true);
-        window.addEventListener("resize", handler);
-        return handler; 
-    }
+    // // Функция для вызова обновления после завершения изменения размера
+    // function callAfterResize(func, delay) {
+    //     let dc = gsap.delayedCall(delay || 0.2, func).pause(),
+    //         handler = () => dc.restart(true);
+    //     window.addEventListener("resize", handler);
+    //     return handler; 
+    // }
 
     updateMargin();
     updateAnimation();
 
     // Добавляем обработку события resize с задержкой для футера и heroWrapper
-    const resizeHandler = callAfterResize(() => {
-        updateAnimation();
-    });
+    // const resizeHandler = callAfterResize(() => {
+        // updateAnimation();
+    // });
 
 
 });
+
+function changeOrientation() {
+      location.reload();
+}
+window.addEventListener('orientationchange', changeOrientation);

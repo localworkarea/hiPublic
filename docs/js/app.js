@@ -4536,7 +4536,6 @@
                 const lastSection = main.lastElementChild;
                 const footer = document.querySelector(".footer");
                 const footerHeight = footer.offsetHeight;
-                clearSpecificScrollTriggers();
                 gsap.set(footer, {
                     yPercent: 60,
                     opacity: 0,
@@ -4635,21 +4634,13 @@
                     }
                 });
             }
-            function clearSpecificScrollTriggers() {
-                ScrollTrigger.getAll().forEach((trigger => trigger.kill()));
-                ScrollTrigger.refresh();
-            }
-            function callAfterResize(func, delay) {
-                let dc = gsap.delayedCall(delay || .2, func).pause(), handler = () => dc.restart(true);
-                window.addEventListener("resize", handler);
-                return handler;
-            }
             updateMargin();
             updateAnimation();
-            callAfterResize((() => {
-                updateAnimation();
-            }));
         }));
+        function changeOrientation() {
+            location.reload();
+        }
+        window.addEventListener("orientationchange", changeOrientation);
         window["FLS"] = false;
         isWebp();
         addLoadedClass();
