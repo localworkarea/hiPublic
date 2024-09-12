@@ -1065,7 +1065,8 @@ body * {
   height: -webkit-max-content;
   height: max-content;
   overflow: hidden;
-  cursor: pointer
+  cursor: pointer;
+  will-change: transform
 }
 .cases__item::before {
   content: "";

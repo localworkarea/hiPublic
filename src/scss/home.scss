@@ -833,6 +833,7 @@
     height: max-content;
     overflow: hidden;
     cursor: pointer;
+    will-change: transform;
     @media (min-width:$mobileSmall){
       transform: scale(0);
       transition: transform .65s ease;
