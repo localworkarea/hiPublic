@@ -833,14 +833,14 @@
     height: max-content;
     overflow: hidden;
     cursor: pointer;
-    will-change: transform;
+    // will-change: transform;
     @media (min-width:$mobileSmall){
       transform: scale(0);
       transition: transform .65s ease;
     }
     @media (max-width:$mobileSmall){
-      transform: scale(0.2);
-      transition: transform .35s ease;       
+      opacity: 0;
+      transition: opacity .65s ease;       
     }
     &::before {
       content:'';
@@ -870,7 +870,12 @@
 
  
     &._watcher-view {
-      transform: scale(1);
+      @media (min-width:$mobileSmall){
+        transform: scale(1);
+      }
+      @media (max-width:$mobileSmall){
+         opacity: 1; 
+      }
     }
     @media (min-width:$tablet){
       &:nth-child(1) {

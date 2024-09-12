@@ -12,10 +12,10 @@
 				<section class="hero">
 					<div class="hero__wrapper">
 						<div class="hero__bg">
-							<video class="hero__video video-hero-pc ibg" autoplay muted loop playsinline >
+							<video class="hero__video video-hero-pc ibg" autoplay muted loop playsinline poster="img/poster/poster.jpg">
 								<source  src="files/original/16x9 clean.mp4" type="video/mp4" width="1440" height="800">
 							</video>
-							<video class="hero__video video-hero-mb ibg" autoplay muted loop playsinline >
+							<video class="hero__video video-hero-mb ibg" autoplay muted loop playsinline poster="img/poster/poster-mb.jpg">
 								<source src="files/original/9х16 clean.mp4" type="video/mp4" width="390" height="670">
 							</video>
 						</div>
@@ -614,9 +614,9 @@
 			</main>
 			@@include('html/_footer.htm',{})
 		</div>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 		@@include('html/_js.htm',{})
 		<script src="https://unpkg.com/split-type"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	</body>
 </html>
