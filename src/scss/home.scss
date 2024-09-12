@@ -829,12 +829,18 @@
   &__item {
     position: relative;
     aspect-ratio: 1/1;
+    width: 100%;
     height: max-content;
     overflow: hidden;
     cursor: pointer;
-    transform: scale(0);
-    transition: transform .65s ease;
-
+    @media (min-width:$mobileSmall){
+      transform: scale(0);
+      transition: transform .65s ease;
+    }
+    @media (max-width:$mobileSmall){
+      transform: scale(0.2);
+      transition: transform .35s ease;       
+    }
     &::before {
       content:'';
       position: absolute;

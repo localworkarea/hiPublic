@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Добавляем обработку события resize с задержкой для футера и heroWrapper
     // const resizeHandler = callAfterResize(() => {
-        // updateAnimation();
+    //     updateAnimation();
     // });
 
 
