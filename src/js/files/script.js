@@ -336,21 +336,6 @@ document.addEventListener("DOMContentLoaded", function() {
         ScrollTrigger.refresh();
     }
 
-    // // Функция для вызова обновления после завершения изменения размера
-    // function callAfterResize(func, delay) {
-    //     let dc = gsap.delayedCall(delay || 0.2, func).pause(),
-    //         handler = () => dc.restart(true);
-    //     window.addEventListener("resize", handler);
-    //     return handler; 
-    // }
-
-    // updateMargin();
-    // updateAnimation();
-
-    // Добавляем обработку события resize с задержкой для футера и heroWrapper
-    // const resizeHandler = callAfterResize(() => {
-    //     updateAnimation();
-    // });
 
     function callAfterResize(func, delay) {
       let dc = gsap.delayedCall(delay || 0.2, func).pause(),
@@ -362,14 +347,14 @@ document.addEventListener("DOMContentLoaded", function() {
               dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
               lastWindowWidth = currentWindowWidth; // Обновляем ширину
 
-            // Выводим сообщение в консоль
-            console.log("Resize");
-            // Добавляем красный бордер на viewport
-            document.body.style.border = '3px solid red';
-            // Убираем бордер через 2 секунды
-            setTimeout(() => {
-                document.body.style.border = 'none';
-            }, 2000);
+            // // Выводим сообщение в консоль
+            // console.log("Resize");
+            // // Добавляем красный бордер на viewport
+            // document.body.style.border = '3px solid red';
+            // // Убираем бордер через 2 секунды
+            // setTimeout(() => {
+            //     document.body.style.border = 'none';
+            // }, 2000);
 
           }
       };
@@ -454,7 +439,7 @@ function stopOverscroll(element) {
   stopOverscroll();
 
 
-// function changeOrientation() {
-//       location.reload();
-// }
-// window.addEventListener('orientationchange', changeOrientation);
+function changeOrientation() {
+      location.reload();
+}
+window.addEventListener('orientationchange', changeOrientation);

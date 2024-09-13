@@ -4627,11 +4627,6 @@
                     if (currentWindowWidth !== lastWindowWidth) {
                         dc.restart(true);
                         lastWindowWidth = currentWindowWidth;
-                        console.log("Resize");
-                        document.body.style.border = "3px solid red";
-                        setTimeout((() => {
-                            document.body.style.border = "none";
-                        }), 2e3);
                     }
                 };
                 window.addEventListener("resize", handler);
@@ -4678,6 +4673,10 @@
             scroller.style.overscrollBehavior = "none";
         }
         stopOverscroll();
+        function changeOrientation() {
+            location.reload();
+        }
+        window.addEventListener("orientationchange", changeOrientation);
         window["FLS"] = false;
         isWebp();
         addLoadedClass();

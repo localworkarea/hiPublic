@@ -1067,15 +1067,24 @@ body * {
   display: grid
 }
 .cases__item {
+  cursor: pointer
+}
+.cases__item._watcher-view .cases__content {
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+.cases__content {
   position: relative;
   aspect-ratio: 1/1;
   width: 100%;
   height: -webkit-max-content;
   height: max-content;
   overflow: hidden;
-  cursor: pointer
+  transition: -webkit-transform .65s ease;
+  transition: transform .65s ease;
+  transition: transform .65s ease,-webkit-transform .65s ease
 }
-.cases__item::before {
+.cases__content::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1083,18 +1092,18 @@ body * {
   opacity: 0;
   transition: opacity .3s ease
 }
-.cases__item img {
+.cases__content img {
   aspect-ratio: 1/1
 }
-.cases__item:hover::before {
+.cases__content:hover::before {
   opacity: .7
 }
-.cases__item:hover .cases__sub-title span,
-.cases__item:hover .cases__txt span {
+.cases__content:hover .cases__sub-title span,
+.cases__content:hover .cases__txt span {
   -webkit-transform: translateY(0);
   transform: translateY(0)
 }
-.cases__item:hover .cases__txt {
+.cases__content:hover .cases__txt {
   transition-delay: .1s
 }
 .cases__wr {
@@ -1465,16 +1474,9 @@ body * {
   .partners__item:nth-child(4n+8) {
     transition-delay: .24s
   }
-  .cases__item {
+  .cases__content {
     -webkit-transform: scale(0);
-    transform: scale(0);
-    transition: -webkit-transform .65s ease;
-    transition: transform .65s ease;
-    transition: transform .65s ease,-webkit-transform .65s ease
-  }
-  .cases__item._watcher-view {
-    -webkit-transform: scale(1);
-    transform: scale(1)
+    transform: scale(0)
   }
   .articles__body {
     grid-template-columns: repeat(2,1fr)
@@ -1792,16 +1794,16 @@ body * {
   .cases__list {
     grid-template-columns: repeat(4,1fr)
   }
-  .cases__item:nth-child(1) {
+  .cases__item:nth-child(1) .cases__content {
     transition-delay: .15s
   }
-  .cases__item:nth-child(2) {
+  .cases__item:nth-child(2) .cases__content {
     transition-delay: 0s
   }
-  .cases__item:nth-child(3) {
+  .cases__item:nth-child(3) .cases__content {
     transition-delay: .15s
   }
-  .cases__item:nth-child(4) {
+  .cases__item:nth-child(4) .cases__content {
     transition-delay: .05s
   }
 }
@@ -2180,12 +2182,9 @@ body * {
   .blog-article .blog__title {
     font-size: 5rem!important
   }
-  .cases__item {
-    opacity: 0;
-    transition: opacity .65s ease
-  }
-  .cases__item._watcher-view {
-    opacity: 1
+  .cases__content {
+    -webkit-transform: scale(.2);
+    transform: scale(.2)
   }
 }
 @media (max-width:22.56125em) {
