@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-	@@include('html/_head.htm',{
-	"title":"hiPublic | HOME"
-	})
+<html lang="en" class="lock">
+
+	<head>
+		<title>hiPublic | HOME</title>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<style>body{opacity: 0;}</style>
+		<link rel="stylesheet" href="css/style.min.css">
+		<link rel="shortcut icon" href="favicon.ico">
+		<!-- <meta name="robots" content="noindex, nofollow"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
 	<body data-smooth-scroll="true">
 		<div class="wrapper main-page">
 			@@include('html/_header.htm',{
@@ -18,6 +26,28 @@
 							<video class="hero__video video-hero-mb ibg" autoplay muted loop playsinline poster="img/poster/poster-mb.jpg">
 								<source src="files/original/9х16 clean.mp4" type="video/mp4" width="390" height="670">
 							</video>
+							<picture>
+								<source srcset="@img/hero/hero-pc.png" media="(min-width: 30.061em)" type="image/webp">
+								<source srcset="@img/hero/hero-mb.png" media="(max-width: 30.061em)" type="image/webp">
+								<img class="hero__image ibg" src="@img/hero/hero-pc.png" width="1440" height="800" alt="image">
+							</picture>
+						</div>
+						<div class="hero__anim anim-hero">
+							<div class="anim-hero__lt">
+									<img class="anim-hero__lt-h" src="@img/anim/lt-h.svg" width="150" height="207" alt="Image">
+									<img class="anim-hero__lt-i" src="@img/anim/lt-i.svg" width="89" height="207" alt="Image">
+							</div>
+							<div class="anim-hero__wrapper">
+									</span>
+									<h1 class="anim-hero__title split-both">
+										FROM<br>
+										NOW TO<br> 
+										WOW
+								</h1>
+								<div class="anim-hero__wr-hi">
+									<img class="anim-hero__hi" src="@img/icons/hi.svg" width="312" height="363" alt="logo hi">
+								</div>
+							</div>
 						</div>
 						<div class="hero__container">
 							<div class="hero__about">

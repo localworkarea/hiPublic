@@ -30,6 +30,11 @@ export function addLoadedClass() {
 		window.addEventListener("load", function () {
 			setTimeout(function () {
 				document.documentElement.classList.add('loaded');
+				document.documentElement.classList.remove('lock');
+					// Update data-smooth-scroll if it exists
+					if (document.body.hasAttribute('data-smooth-scroll')) {
+						document.body.setAttribute('data-smooth-scroll', 'true');
+					}
 			}, 0);
 		});
 	}

@@ -14,9 +14,13 @@
     padding-bottom: toRem(10);
   }
   &.home-header {
+    opacity: 0;
     // position: absolute;
     background-color: transparent;
-    transition: transform .45s ease, background-color .3s ease;
+    transition: transform .45s ease, background-color .3s ease, opacity .65s ease 3s;
+    .loaded & {
+      opacity: 1;
+    }
     &::before {
       content:'';
       position: absolute;
@@ -38,6 +42,7 @@
       transform: translateY(0);
       transition-delay: 1s;
     }
+
   }
   // .header__wrapper
   &__wrapper {

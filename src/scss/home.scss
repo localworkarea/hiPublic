@@ -21,9 +21,9 @@
 		// .hero__video
 		&__video {
       position: absolute;
+      z-index: -1;
       top: 0;
       left: 0;
-      z-index: -1;
       min-height: 100svh;
       &.video-hero-pc {
         @media (max-width: toRem(650.98)){
@@ -36,20 +36,36 @@
         }
       }
 		}
+    // .hero__image
+    &__image {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      min-height: 100svh;
+      transition: transform 4s linear;
+      .loaded & {
+        transform: scale(1.05);
+      }
+    }
+    // .hero__anim
+    &__anim {
+    }
 		// .hero__container
 		&__container {
+      opacity: 0;
+      transition: opacity .65s ease;
       width: 100%;
 
       position: absolute;
-      z-index: 1;
+      z-index: 3;
       left: 50%;
       transform: translate(-50%,0);
       display: flex;
       justify-content: center;
-      @media (min-width:$mobile){
-      }
-      @media (max-width:$mobile) and (min-width: toEm(650.98)) {  
-        // bottom: -3vw;
+      .loaded & {
+        opacity: 1;
+        transition-delay: 2.8s;
       }
       @media (min-width:toEm(650.98)){
         bottom: 3vw;
@@ -91,8 +107,217 @@
 }
 
 
+.anim-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  @media (min-width:toEm(750.98)){
+    align-items: center;
+  }
+  &:before {
+    content:'';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(90, 0, 88, 0.3);
+    transition: opacity .3s ease;
+    .loaded & {
+      opacity: 0;
+      transition-delay: 1s;
+    }
+  }
+  // .anim-hero__lt
+  &__lt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+    @include adaptiveValue("height", 280, 80,0,1440.98,390.98);
+    .loaded & {
+      animation: lt-hi 1.2s cubic-bezier(.17,.89,.37,.93) 0s forwards;
+    }
+  }
+  &__lt-h,
+  &__lt-i {
+    height: 100%;
+    width: auto;
+  }
+  // .anim-hero__lt-h
+  &__lt-h {
+    transform: translateY(-100%);
+    .loaded & {
+      animation: lt-h 1.2s cubic-bezier(.17,.89,.37,.93) 0s forwards;
+    }
+  }
+  // .anim-hero__lt-i
+  &__lt-i {
+    position: relative;
+    left: -6%;
+    transform: translateY(100%);
+    .loaded & {
+      animation: lt-i 1.2s cubic-bezier(.17,.89,.37,.93) 0s forwards;
+    }
+  }
+	// .anim-hero__wrapper
+	&__wrapper {
+    // opacity: 0;
+
+    width: 100%;
+    margin-inline: auto;
+    @include adaptiveValue("max-width", 2170, 1440,0,1920,1440.98);
+    @include adaptiveValue("padding-left", 170,60,2,1440.98,992.98);
+    @include adaptiveValue("padding-left", 60,20,3,992.98,768.98);
+    @include adaptiveValue("padding-right", 170,60,2,1440.98,992.98);
+    @include adaptiveValue("padding-right", 60,20,3,992.98,768.98);
+    @media (min-width:toEm(750.98)){
+      display: flex;
+      justify-content: space-between;
+    }
+	}
+  // .anim-hero__title
+  &__title {
+    line-height: 0.9;
+    color: #fff;
+    font-weight: 900;
+    @include adaptiveValue("font-size", 208, 160,2,1920,1440.98);
+    @include adaptiveValue("font-size", 160, 60,3,1440.98,390.98);
+    br {
+      @media (max-width: toEm(750.98)){
+          display: none;
+      }
+    }
+    @media (max-width: toEm(750.98)){
+        margin-inline: auto;
+        width: max-content;
+        margin-top: toRem(100);
+    }
+    @media (max-width:$mobileSmall){
+       margin-top: toRem(80); 
+    }
+    .line {
+      overflow: hidden;
+    }
+    .word {
+      transition: .9s ease;
+      transform: translateY(100%);
+      .loaded & {
+        animation: titleAnim .9s cubic-bezier(.24,.95,.31,.94) calc(1.7s + var(--index) * 0.03s) forwards;
+      }
+    }
+  }
+  // .anim-hero__wr-hi
+  &__wr-hi {
+    @media (min-width:toEm(750.98)){
+        
+    }
+    @media (max-width:toEm(750.98)){
+      display: none;
+    }
+  }
+  // .anim-hero__hi
+  &__hi {
+    @include adaptiveValue("width", 430, 312,2,1920,1440.98);
+    @include adaptiveValue("width", 312, 200,3,1440.98,650.98);
+    @media (min-width:toEm(750.98)){
+      aspect-ratio: 312/363;
+      height: auto;
+      transform: translate(0%,0%) scale(0) rotate(-60deg);
+      transform-origin: 80% 100%;
+      .loaded & {
+        // animation: qube 1.4s ease 0.5s forwards;
+        animation: qube 1.4s cubic-bezier(.59,.92,.57,.97) 1.4s forwards;
+      }
+    }
+  }
+}
+
+@keyframes lt-h {
+  0% {
+    transform: translateY(-100%);
+  }
+  31.4% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-102%);
+  }
+}
+@keyframes lt-i {
+  0% {
+    transform: translateY(100%);
+  }
+  31.4% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(102%);
+  }
+}
+@keyframes lt-hi {
+  0% {
+    transform: translate(-50%,-50%) scale(1);
+  }
+  42.28% {
+    transform: translate(-50%,-50%) scale(1);
+  }
+  66.11% {
+    transform: translate(-50%,-50%) scale(0.68);
+  }
+  89.25% {
+    transform: translate(-50%,-50%) scale(1);
+  }
+}
+@keyframes titleAnim {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@keyframes qube {
+  0% {
+    transform: translate(0%, -50%) scale(0) rotate(-60deg);
+    transform-origin: 80% 100%;
+    animation-timing-function: ccubic-bezier(.3,1.32,.66,1.01);
+  }
+  34.3% {
+    transform: translate(0%, -50%) scale(1) rotate(10deg);
+  }
+  50.7% {
+    transform: translate(0%, 5%) scale(1) rotate(0deg);
+    animation-timing-function: ccubic-bezier(.3,1.32,.66,1.01);
+  }
+  75% {
+    transform: translate(0%, -10%) scale(1) rotate(-2deg);
+    // animation-timing-function: cubic-bezier(.29,1.63,.37,.78);
+    // animation-timing-function: cubic-bezier(.23,1.81,.32,.72);
+    animation-timing-function: cubic-bezier(.53,1.43,.6,.9);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1) rotate(0deg);
+  }
+}
+
 // == WHAT SECTION ======================================
 .what {
+  opacity: 0;
+  transition: opacity .3s ease;
+  .loaded & {
+    opacity: 1;
+    transition-delay: 3s;
+  }
   @include adaptiveValue("padding-top", 230, 200,2,1440,768.98);
   @include adaptiveValue("padding-bottom", 230, 95);
   @media (min-width:$mobile){

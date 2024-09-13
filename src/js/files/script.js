@@ -3,7 +3,10 @@ import { isMobile } from "./functions.js";
 // Підключення списку активних модулів
 import { flsModules } from "./modules.js";
 
-// 1. ПЛАВНАЯ ПРОКРУТКА СТРАНИЦЫ =========================
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // 1. ПЛАВНАЯ ПРОКРУТКА СТРАНИЦЫ =========================
 
 // 1. Добавить к тегу body на странице атрибут data-smooth-scroll="true"
 // 2. Вставить следующий код в скрипт
@@ -87,12 +90,8 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
   smoothScroll(0.08, 0.9);
 }
 
-
-
-
 // ========================================================
 
-document.addEventListener("DOMContentLoaded", function() {
     
     gsap.registerPlugin(ScrollTrigger);
 
