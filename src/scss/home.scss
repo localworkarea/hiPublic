@@ -312,17 +312,16 @@
 
 // == WHAT SECTION ======================================
 .what {
-  opacity: 0;
-  transition: opacity .3s ease;
-  .loaded & {
-    opacity: 1;
-    transition-delay: 3s;
-  }
   @include adaptiveValue("padding-top", 230, 200,2,1440,768.98);
   @include adaptiveValue("padding-bottom", 230, 95);
   @media (min-width:$mobile){
-    clip-path: polygon(20% 130px, 80% 130px, 100% 0, 100% 87%, 0 100%, 0 0);
+    clip-path: polygon(0% 130px, 100% 130px, 100% 0, 100% 87%, 0 100%, 0 0);
+    transition: clip-path .3s ease;
     margin-top: toRem(-130);
+    .loaded & {
+      clip-path: polygon(20% 130px, 80% 130px, 100% 0, 100% 87%, 0 100%, 0 0);
+      transition-delay: 3s;
+    }
   }
   @media (max-width:$mobile){
     padding-top: toRem(60);
@@ -487,7 +486,12 @@
     @include adaptiveValue("font-size", 18, 16);
     p {
       opacity: 0;
-      transition: opacity .65s ease;
+      @media (min-width:$mobileSmall){
+        transition: opacity .65s ease;
+      }
+      @media (max-width:$mobileSmall){
+        transition: opacity .45s ease;
+      }
     }
     &:nth-child(1) {
       .advantages__icon, p {
@@ -533,8 +537,13 @@
   // .advantages__icon
   &__icon {
     clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
-    transition: clip-path .65s ease;
-
+    
+    @media (min-width:$mobileSmall){
+      transition: clip-path .65s ease;
+    }
+    @media (max-width:$mobileSmall){
+      transition: clip-path .35s ease;
+    }
 
     display: grid;
     place-items: center;

@@ -974,14 +974,6 @@ body * {
     transform: translate(0,0) scale(1) rotate(0)
   }
 }
-.what {
-  opacity: 0;
-  transition: opacity .3s ease
-}
-.loaded .what {
-  opacity: 1;
-  transition-delay: 3s
-}
 .what__items {
   display: grid;
   -webkit-column-gap: 3.75rem;
@@ -1081,8 +1073,7 @@ body * {
   font-weight: 500
 }
 .advantages__item p {
-  opacity: 0;
-  transition: opacity .65s ease
+  opacity: 0
 }
 .advantages__item:nth-child(1) .advantages__icon,
 .advantages__item:nth-child(1) p {
@@ -1118,7 +1109,6 @@ body * {
 }
 .advantages__icon {
   clip-path: polygon(0 0,100% 0,100% 0,0 0);
-  transition: clip-path .65s ease;
   display: grid;
   place-items: center;
   box-shadow: 0 5px 10px 0 rgba(134,16,131,.35);
@@ -1738,6 +1728,12 @@ body * {
   .hero__about {
     padding: 1.25rem 1.5rem
   }
+  .advantages__item p {
+    transition: opacity .65s ease
+  }
+  .advantages__icon {
+    transition: clip-path .65s ease
+  }
   .influencers__list {
     gap: 1.375rem
   }
@@ -1901,8 +1897,13 @@ body * {
     margin-inline: auto
   }
   .what {
-    clip-path: polygon(20% 130px,80% 130px,100% 0,100% 87%,0 100%,0 0);
+    clip-path: polygon(0 130px,100% 130px,100% 0,100% 87%,0 100%,0 0);
+    transition: clip-path .3s ease;
     margin-top: -8.125rem
+  }
+  .loaded .what {
+    clip-path: polygon(20% 130px,80% 130px,100% 0,100% 87%,0 100%,0 0);
+    transition-delay: 3s
   }
   .contacts__body {
     grid-template-columns: 1fr 1fr
@@ -2530,6 +2531,12 @@ body * {
   }
   .anim-hero__title {
     margin-top: 5rem
+  }
+  .advantages__item p {
+    transition: opacity .45s ease
+  }
+  .advantages__icon {
+    transition: clip-path .35s ease
   }
   .influencers__list {
     gap: 1.125rem
