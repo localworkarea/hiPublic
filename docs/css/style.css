@@ -836,11 +836,21 @@ body * {
   height: auto;
   max-width: 50%
 }
-.influencers__title {
-  overflow: hidden
+.influencers {
+  -webkit-transform: scale(.8);
+  transform: scale(.8);
+  opacity: 0;
+  transition: opacity .3s ease,-webkit-transform .5s ease;
+  transition: transform .5s ease,opacity .3s ease;
+  transition: transform .5s ease,opacity .3s ease,-webkit-transform .5s ease
 }
-.influencers__title span {
-  display: inline-block
+.influencers._watcher-view {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+.influencers__title .word {
+  transition-delay: .1s!important
 }
 .influencers__list {
   display: grid;

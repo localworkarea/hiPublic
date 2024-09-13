@@ -331,6 +331,13 @@
 
 // == INFLUENCERS SECTION ======================================
 .influencers {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform .5s ease, opacity .3s ease;;
+  &._watcher-view {
+    opacity: 1;
+    transform: scale(1);
+  }
   @extend %sectionPddTB;
   // @extend %left-Right-dwn;
   // .influencers__container
@@ -338,9 +345,12 @@
   }
   // .influencers__title
   &__title {
-    overflow: hidden;
-    span {
-      display: inline-block;
+    // overflow: hidden;
+    // span {
+    //   display: inline-block;
+    // }
+    .word {
+      transition-delay: .1s !important;
     }
   }
   // .influencers__list

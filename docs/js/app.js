@@ -4516,11 +4516,16 @@
                 }));
             }
             initSplitType();
+            let lastWidth = document.body.clientWidth;
             const resizeObserver = new ResizeObserver((entries => {
                 entries.forEach((entry => {
-                    initSplitType();
+                    const currentWidth = entry.contentRect.width;
+                    if (currentWidth !== lastWidth) {
+                        lastWidth = currentWidth;
+                        initSplitType();
+                        updateMargin();
+                    }
                 }));
-                updateMargin();
             }));
             resizeObserver.observe(document.body);
             function updateMargin() {
@@ -4536,6 +4541,7 @@
                 const lastSection = main.lastElementChild;
                 const footer = document.querySelector(".footer");
                 const footerHeight = footer.offsetHeight;
+                clearSpecificScrollTriggers();
                 gsap.set(footer, {
                     yPercent: 60,
                     opacity: 0
@@ -4564,104 +4570,75 @@
                     }
                 });
                 const influencerSection = document.querySelector(".influencers");
-                const influencerTitle = document.querySelectorAll(".influencers__title");
-                const influencerWords = document.querySelectorAll(".influencers__title span");
                 const influencerContainer = document.querySelector(".influencers__container");
-                if (influencerSection) {
-                    gsap.set(influencerSection, {
-                        scale: .8,
-                        immediateRender: true
-                    });
-                    gsap.to(influencerSection, {
-                        scale: 1,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: influencerSection,
-                            start: "top bottom",
-                            end: "top 80%",
-                            scrub: 1,
-                            immediateRender: false
-                        }
-                    });
-                    gsap.set(influencerWords, {
-                        transform: "translate(0%, 100%)"
-                    });
-                    gsap.to(influencerWords, {
-                        transform: "translate(0%, 0%)",
-                        ease: "power4.out",
-                        scrollTrigger: {
-                            trigger: influencerTitle,
-                            start: "top bottom",
-                            end: "top center",
-                            scrub: true
-                        }
-                    });
-                    gsap.to(influencerContainer, {
-                        transform: "translate(0%, -100px)",
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: influencerContainer,
-                            start: "bottom bottom",
-                            end: "bottom top",
-                            scrub: 1
-                        }
-                    });
-                }
                 const partnersSection = document.querySelector(".partners");
                 const partnersContainer = document.querySelector(".partners__container");
-                if (partnersSection) gsap.to(partnersContainer, {
-                    transform: "translate(0%, -100px)",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: partnersContainer,
-                        start: "top center",
-                        end: "bottom top",
-                        scrub: 1
+                const teamSection = document.querySelector(".team");
+                const teamContainer = document.querySelector(".team__container");
+                let breakPoint = 30.061;
+                let mm = gsap.matchMedia();
+                mm.add({
+                    isDesktop: `(min-width: ${breakPoint}em)`,
+                    isMobile: `(max-width: ${breakPoint}em)`
+                }, (context => {
+                    let {isDesktop, isMobile} = context.conditions;
+                    if (isDesktop) {
+                        if (influencerSection) gsap.to(influencerContainer, {
+                            transform: "translate(0%, -100px)",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: influencerContainer,
+                                start: "bottom bottom",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        });
+                        if (partnersSection) gsap.to(partnersContainer, {
+                            transform: "translate(0%, -100px)",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: partnersContainer,
+                                start: "top center",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        });
+                        if (teamSection) gsap.to(teamContainer, {
+                            transform: "translate(0%, -100px)",
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: teamContainer,
+                                start: "top center",
+                                end: "bottom top",
+                                scrub: 1
+                            }
+                        });
                     }
-                });
+                    if (isMobile) ;
+                }));
+            }
+            function clearSpecificScrollTriggers() {
+                ScrollTrigger.getAll().forEach((trigger => trigger.kill()));
+                ScrollTrigger.refresh();
+            }
+            function callAfterResize(func, delay) {
+                let dc = gsap.delayedCall(delay || .2, func).pause(), lastWindowWidth = window.innerWidth;
+                const handler = () => {
+                    const currentWindowWidth = window.innerWidth;
+                    if (currentWindowWidth !== lastWindowWidth) {
+                        dc.restart(true);
+                        lastWindowWidth = currentWindowWidth;
+                    }
+                };
+                window.addEventListener("resize", handler);
+                return handler;
             }
             updateMargin();
             updateAnimation();
+            callAfterResize((() => {
+                updateAnimation();
+            }));
         }));
-        function stopOverscroll(element) {
-            element = gsap.utils.toArray(element)[0] || window;
-            (element === document.body || element === document.documentElement) && (element = window);
-            let lastTouch, forcing, lastScroll = 0, forward = true, isRoot = element === window, scroller = isRoot ? document.scrollingElement : element, ua = window.navigator.userAgent + "", getMax = isRoot ? () => scroller.scrollHeight - window.innerHeight : () => scroller.scrollHeight - scroller.clientHeight, addListener = (type, func) => element.addEventListener(type, func, {
-                passive: false
-            }), revert = () => {
-                scroller.style.overflowY = "auto";
-                forcing = false;
-            }, kill = () => {
-                forcing = true;
-                scroller.style.overflowY = "hidden";
-                !forward && scroller.scrollTop < 1 ? scroller.scrollTop = 1 : scroller.scrollTop = getMax() - 1;
-                setTimeout(revert, 1);
-            }, handleTouch = e => {
-                let evt = e.changedTouches ? e.changedTouches[0] : e, forward = evt.pageY <= lastTouch;
-                if ((!forward && scroller.scrollTop <= 1 || forward && scroller.scrollTop >= getMax() - 1) && e.type === "touchmove") e.preventDefault(); else lastTouch = evt.pageY;
-            }, handleScroll = e => {
-                if (!forcing) {
-                    let scrollTop = scroller.scrollTop;
-                    forward = scrollTop > lastScroll;
-                    if (!forward && scrollTop < 1 || forward && scrollTop >= getMax() - 1) {
-                        e.preventDefault();
-                        kill();
-                    }
-                    lastScroll = scrollTop;
-                }
-            };
-            if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
-                addListener("scroll", handleScroll);
-                addListener("touchstart", handleTouch);
-                addListener("touchmove", handleTouch);
-            }
-            scroller.style.overscrollBehavior = "none";
-        }
-        stopOverscroll();
-        function changeOrientation() {
-            location.reload();
-        }
-        window.addEventListener("orientationchange", changeOrientation);
         window["FLS"] = false;
         isWebp();
         addLoadedClass();

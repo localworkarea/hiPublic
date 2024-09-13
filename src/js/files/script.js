@@ -165,16 +165,38 @@ document.addEventListener("DOMContentLoaded", function() {
     // Инициализация SplitType при загрузке
     initSplitType();
     
+    // // Создаем ResizeObserver для отслеживания изменений размера окна
+    // const resizeObserver = new ResizeObserver(entries => {
+    //   entries.forEach(entry => {
+    //     initSplitType();
+    //   });
+
+    //   // oтслеживаем рисайз для функции updateMargin()
+    //   updateMargin();
+      
+    // });
+    // // Наблюдаем за изменениями в элементе body (можно выбрать другой контейнер, если нужно)
+    // resizeObserver.observe(document.body);
+
     // Создаем ResizeObserver для отслеживания изменений размера окна
+    let lastWidth = document.body.clientWidth; // Запоминаем начальную ширину
+    
     const resizeObserver = new ResizeObserver(entries => {
       entries.forEach(entry => {
-        initSplitType();
-      });
-
-      // oтслеживаем рисайз для функции updateMargin()
-      updateMargin();
+        const currentWidth = entry.contentRect.width; // Получаем текущую ширину
       
+        if (currentWidth !== lastWidth) { // Проверяем, изменилась ли ширина
+          lastWidth = currentWidth; // Обновляем ширину
+        
+          // Вызовите ваши функции только если изменилась ширина
+          initSplitType();
+        
+          // Отслеживаем рисайз для функции updateMargin()
+          updateMargin();
+        }
+      });
     });
+    
     // Наблюдаем за изменениями в элементе body (можно выбрать другой контейнер, если нужно)
     resizeObserver.observe(document.body);
 
@@ -203,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const footerHeight = footer.offsetHeight;
 
 
-        // clearSpecificScrollTriggers();
+        clearSpecificScrollTriggers();
 
 
         gsap.set(footer, { yPercent: 60, opacity: 0 });
@@ -236,86 +258,80 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const influencerSection = document.querySelector('.influencers');
-        const influencerTitle  = document.querySelectorAll('.influencers__title');
-        const influencerWords  = document.querySelectorAll('.influencers__title span');
         const influencerContainer  = document.querySelector('.influencers__container');
-        
-        if (influencerSection) {
-            gsap.set(influencerSection, { scale: 0.8, immediateRender: true });
-            gsap.to(influencerSection, {
-                scale: 1,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: influencerSection,
-                    start: "top bottom",
-                    end: "top 80%", 
-                    scrub: 1,
-                    immediateRender: false,
-                },
-            });
-             // Анимация для элементов .word
-            gsap.set(influencerWords, {  transform: 'translate(0%, 100%)',});
-            gsap.to(influencerWords, {
-               transform: 'translate(0%, 0%)',
-                ease: "power4.out",
-                // duration: 0.65,
-                scrollTrigger: {
-                    trigger: influencerTitle,
-                    start: "top bottom",
-                    end: "top center",
-                    scrub: true,
-                },
-            });
-            gsap.to(influencerContainer, {
-                transform: 'translate(0%, -100px)',
-                ease: "none",
-                scrollTrigger: {
-                    trigger: influencerContainer,
-                    start: "bottom bottom",
-                    end: "bottom top", 
-                    scrub: 1,
-                },
-            });
-        }
-
         const partnersSection  = document.querySelector('.partners');
         const partnersContainer  = document.querySelector('.partners__container');
-        if (partnersSection) {
-            gsap.to(partnersContainer, {
-                transform: 'translate(0%, -100px)',
-                ease: "none",
-                scrollTrigger: {
-                    trigger: partnersContainer,
-                    start: "top center",
-                    end: "bottom top", 
-                    scrub: 1,
-                },
-            });
-        }
-        // const teamSection  = document.querySelector('.team');
-        // const teamContainer  = document.querySelector('.team__container');
-        // if (teamSection) {
-        //     gsap.to(teamContainer, {
-        //         transform: 'translate(0%, -100px)',
-        //         ease: "none",
-        //         scrollTrigger: {
-        //             trigger: teamContainer,
-        //             start: "top center",
-        //             end: "bottom top", 
-        //             scrub: 1,
-        //         },
-        //     });
-        // }
+        const teamSection  = document.querySelector('.team');
+        const teamContainer  = document.querySelector('.team__container');
+
+        let breakPoint = 30.061;
+        let mm = gsap.matchMedia();
+  
+        mm.add({
+          isDesktop: `(min-width: ${breakPoint}em)`,
+          isMobile: `(max-width: ${breakPoint}em)`
+        }, (context) => {
+        
+          let {isDesktop, isMobile} = context.conditions;
+        
+          if (isDesktop) {
+            
+            if (influencerSection) {
+                gsap.to(influencerContainer, {
+                    transform: 'translate(0%, -100px)',
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: influencerContainer,
+                        start: "bottom bottom",
+                        end: "bottom top", 
+                        scrub: 1,
+                    },
+                });
+            }
+    
+           
+            if (partnersSection) {
+                gsap.to(partnersContainer, {
+                    transform: 'translate(0%, -100px)',
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: partnersContainer,
+                        start: "top center",
+                        end: "bottom top", 
+                        scrub: 1,
+                    },
+                });
+            }
+           
+            if (teamSection) {
+                gsap.to(teamContainer, {
+                    transform: 'translate(0%, -100px)',
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: teamContainer,
+                        start: "top center",
+                        end: "bottom top", 
+                        scrub: 1,
+                    },
+                });
+            }
+          }
+
+
+          if (isMobile) {}
+
+        });
+        
 
 
 
     }
 
-    //  // Функция для удаления триггеров
-    //  function clearSpecificScrollTriggers() {
-    //     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    //     ScrollTrigger.refresh();
-    // }
+     // Функция для удаления триггеров
+     function clearSpecificScrollTriggers() {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        ScrollTrigger.refresh();
+    }
 
     // // Функция для вызова обновления после завершения изменения размера
     // function callAfterResize(func, delay) {
@@ -325,83 +341,107 @@ document.addEventListener("DOMContentLoaded", function() {
     //     return handler; 
     // }
 
-    updateMargin();
-    updateAnimation();
+    // updateMargin();
+    // updateAnimation();
 
     // Добавляем обработку события resize с задержкой для футера и heroWrapper
     // const resizeHandler = callAfterResize(() => {
     //     updateAnimation();
     // });
 
+    function callAfterResize(func, delay) {
+      let dc = gsap.delayedCall(delay || 0.2, func).pause(),
+          lastWindowWidth = window.innerWidth; // Запоминаем текущую ширину
+  
+      const handler = () => {
+          const currentWindowWidth = window.innerWidth;
+          if (currentWindowWidth !== lastWindowWidth) {
+              dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
+              lastWindowWidth = currentWindowWidth; // Обновляем ширину
+          }
+      };
+  
+      window.addEventListener("resize", handler);
+      return handler;
+    }
+
+    updateMargin();
+    updateAnimation();
+
+    const resizeHandler = callAfterResize(() => {
+        updateAnimation(); // Ваша функция обновления анимации
+    });
+  
+
 
 });
 
-function stopOverscroll(element) {
-    element = gsap.utils.toArray(element)[0] || window;
-    (element === document.body || element === document.documentElement) &&
-      (element = window);
-    let lastScroll = 0,
-      lastTouch,
-      forcing,
-      forward = true,
-      isRoot = element === window,
-      scroller = isRoot ? document.scrollingElement : element,
-      ua = window.navigator.userAgent + "",
-      getMax = isRoot
-        ? () => scroller.scrollHeight - window.innerHeight
-        : () => scroller.scrollHeight - scroller.clientHeight,
-      addListener = (type, func) =>
-        element.addEventListener(type, func, { passive: false }),
-      revert = () => {
-        scroller.style.overflowY = "auto";
-        forcing = false;
-      },
-      kill = () => {
-        forcing = true;
-        scroller.style.overflowY = "hidden";
-        !forward && scroller.scrollTop < 1
-          ? (scroller.scrollTop = 1)
-          : (scroller.scrollTop = getMax() - 1);
-        setTimeout(revert, 1);
-      },
-      handleTouch = (e) => {
-        let evt = e.changedTouches ? e.changedTouches[0] : e,
-          forward = evt.pageY <= lastTouch;
-        if (
-          ((!forward && scroller.scrollTop <= 1) ||
-            (forward && scroller.scrollTop >= getMax() - 1)) &&
-          e.type === "touchmove"
-        ) {
-          e.preventDefault();
-        } else {
-          lastTouch = evt.pageY;
-        }
-      },
-      handleScroll = (e) => {
-        if (!forcing) {
-          let scrollTop = scroller.scrollTop;
-          forward = scrollTop > lastScroll;
-          if (
-            (!forward && scrollTop < 1) ||
-            (forward && scrollTop >= getMax() - 1)
-          ) {
-            e.preventDefault();
-            kill();
-          }
-          lastScroll = scrollTop;
-        }
-      };
-    if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
-      addListener("scroll", handleScroll);
-      addListener("touchstart", handleTouch);
-      addListener("touchmove", handleTouch);
-    }
-    scroller.style.overscrollBehavior = "none";
-  }
-  stopOverscroll();
+// function stopOverscroll(element) {
+//     element = gsap.utils.toArray(element)[0] || window;
+//     (element === document.body || element === document.documentElement) &&
+//       (element = window);
+//     let lastScroll = 0,
+//       lastTouch,
+//       forcing,
+//       forward = true,
+//       isRoot = element === window,
+//       scroller = isRoot ? document.scrollingElement : element,
+//       ua = window.navigator.userAgent + "",
+//       getMax = isRoot
+//         ? () => scroller.scrollHeight - window.innerHeight
+//         : () => scroller.scrollHeight - scroller.clientHeight,
+//       addListener = (type, func) =>
+//         element.addEventListener(type, func, { passive: false }),
+//       revert = () => {
+//         scroller.style.overflowY = "auto";
+//         forcing = false;
+//       },
+//       kill = () => {
+//         forcing = true;
+//         scroller.style.overflowY = "hidden";
+//         !forward && scroller.scrollTop < 1
+//           ? (scroller.scrollTop = 1)
+//           : (scroller.scrollTop = getMax() - 1);
+//         setTimeout(revert, 1);
+//       },
+//       handleTouch = (e) => {
+//         let evt = e.changedTouches ? e.changedTouches[0] : e,
+//           forward = evt.pageY <= lastTouch;
+//         if (
+//           ((!forward && scroller.scrollTop <= 1) ||
+//             (forward && scroller.scrollTop >= getMax() - 1)) &&
+//           e.type === "touchmove"
+//         ) {
+//           e.preventDefault();
+//         } else {
+//           lastTouch = evt.pageY;
+//         }
+//       },
+//       handleScroll = (e) => {
+//         if (!forcing) {
+//           let scrollTop = scroller.scrollTop;
+//           forward = scrollTop > lastScroll;
+//           if (
+//             (!forward && scrollTop < 1) ||
+//             (forward && scrollTop >= getMax() - 1)
+//           ) {
+//             e.preventDefault();
+//             kill();
+//           }
+//           lastScroll = scrollTop;
+//         }
+//       };
+//     if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
+//       addListener("scroll", handleScroll);
+//       addListener("touchstart", handleTouch);
+//       addListener("touchmove", handleTouch);
+//     }
+//     scroller.style.overscrollBehavior = "none";
+//   }
+//   stopOverscroll();
 
 
-function changeOrientation() {
-      location.reload();
-}
-window.addEventListener('orientationchange', changeOrientation);
+// function changeOrientation() {
+//       location.reload();
+// }
+// window.addEventListener('orientationchange', changeOrientation);
