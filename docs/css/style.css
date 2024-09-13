@@ -595,8 +595,6 @@ body * {
   transform: rotate(45deg)
 }
 .footer {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
   position: fixed;
   width: 100%;
   bottom: 0;

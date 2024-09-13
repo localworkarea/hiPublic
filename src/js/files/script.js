@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Создаем ResizeObserver для отслеживания изменений размера окна
     let lastWidth = document.body.clientWidth; // Запоминаем начальную ширину
-    
+
     const resizeObserver = new ResizeObserver(entries => {
       entries.forEach(entry => {
         const currentWidth = entry.contentRect.width; // Получаем текущую ширину
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     });
-    
+
     // Наблюдаем за изменениями в элементе body (можно выбрать другой контейнер, если нужно)
     resizeObserver.observe(document.body);
 
@@ -227,19 +227,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         clearSpecificScrollTriggers();
 
-
-        gsap.set(footer, { yPercent: 60, opacity: 0 });
-        gsap.to(footer, {
-            yPercent: 0,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-                trigger: lastSection,
-                start: "bottom bottom",
-                end: `+=${footerHeight}`, 
-                scrub: true,
-            },
-        });
+       
+        gsap.fromTo(footer, 
+          { yPercent: 70, opacity: 0 },
+          { 
+              yPercent: 0, 
+              opacity: 1, 
+              ease: "none", 
+              scrollTrigger: {
+                  trigger: lastSection,
+                  start: "bottom bottom",
+                  end: `+=${footerHeight}`, 
+                  scrub: true,
+              },
+          }
+      );
+      
 
         const heroSection = document.querySelector('.hero');
         const heroWrapper = document.querySelector('.hero__wrapper');
@@ -358,6 +361,16 @@ document.addEventListener("DOMContentLoaded", function() {
           if (currentWindowWidth !== lastWindowWidth) {
               dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
               lastWindowWidth = currentWindowWidth; // Обновляем ширину
+
+            // Выводим сообщение в консоль
+            console.log("Resize");
+            // Добавляем красный бордер на viewport
+            document.body.style.border = '3px solid red';
+            // Убираем бордер через 2 секунды
+            setTimeout(() => {
+                document.body.style.border = 'none';
+            }, 2000);
+
           }
       };
   
@@ -376,69 +389,69 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// function stopOverscroll(element) {
-//     element = gsap.utils.toArray(element)[0] || window;
-//     (element === document.body || element === document.documentElement) &&
-//       (element = window);
-//     let lastScroll = 0,
-//       lastTouch,
-//       forcing,
-//       forward = true,
-//       isRoot = element === window,
-//       scroller = isRoot ? document.scrollingElement : element,
-//       ua = window.navigator.userAgent + "",
-//       getMax = isRoot
-//         ? () => scroller.scrollHeight - window.innerHeight
-//         : () => scroller.scrollHeight - scroller.clientHeight,
-//       addListener = (type, func) =>
-//         element.addEventListener(type, func, { passive: false }),
-//       revert = () => {
-//         scroller.style.overflowY = "auto";
-//         forcing = false;
-//       },
-//       kill = () => {
-//         forcing = true;
-//         scroller.style.overflowY = "hidden";
-//         !forward && scroller.scrollTop < 1
-//           ? (scroller.scrollTop = 1)
-//           : (scroller.scrollTop = getMax() - 1);
-//         setTimeout(revert, 1);
-//       },
-//       handleTouch = (e) => {
-//         let evt = e.changedTouches ? e.changedTouches[0] : e,
-//           forward = evt.pageY <= lastTouch;
-//         if (
-//           ((!forward && scroller.scrollTop <= 1) ||
-//             (forward && scroller.scrollTop >= getMax() - 1)) &&
-//           e.type === "touchmove"
-//         ) {
-//           e.preventDefault();
-//         } else {
-//           lastTouch = evt.pageY;
-//         }
-//       },
-//       handleScroll = (e) => {
-//         if (!forcing) {
-//           let scrollTop = scroller.scrollTop;
-//           forward = scrollTop > lastScroll;
-//           if (
-//             (!forward && scrollTop < 1) ||
-//             (forward && scrollTop >= getMax() - 1)
-//           ) {
-//             e.preventDefault();
-//             kill();
-//           }
-//           lastScroll = scrollTop;
-//         }
-//       };
-//     if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
-//       addListener("scroll", handleScroll);
-//       addListener("touchstart", handleTouch);
-//       addListener("touchmove", handleTouch);
-//     }
-//     scroller.style.overscrollBehavior = "none";
-//   }
-//   stopOverscroll();
+function stopOverscroll(element) {
+    element = gsap.utils.toArray(element)[0] || window;
+    (element === document.body || element === document.documentElement) &&
+      (element = window);
+    let lastScroll = 0,
+      lastTouch,
+      forcing,
+      forward = true,
+      isRoot = element === window,
+      scroller = isRoot ? document.scrollingElement : element,
+      ua = window.navigator.userAgent + "",
+      getMax = isRoot
+        ? () => scroller.scrollHeight - window.innerHeight
+        : () => scroller.scrollHeight - scroller.clientHeight,
+      addListener = (type, func) =>
+        element.addEventListener(type, func, { passive: false }),
+      revert = () => {
+        scroller.style.overflowY = "auto";
+        forcing = false;
+      },
+      kill = () => {
+        forcing = true;
+        scroller.style.overflowY = "hidden";
+        !forward && scroller.scrollTop < 1
+          ? (scroller.scrollTop = 1)
+          : (scroller.scrollTop = getMax() - 1);
+        setTimeout(revert, 1);
+      },
+      handleTouch = (e) => {
+        let evt = e.changedTouches ? e.changedTouches[0] : e,
+          forward = evt.pageY <= lastTouch;
+        if (
+          ((!forward && scroller.scrollTop <= 1) ||
+            (forward && scroller.scrollTop >= getMax() - 1)) &&
+          e.type === "touchmove"
+        ) {
+          e.preventDefault();
+        } else {
+          lastTouch = evt.pageY;
+        }
+      },
+      handleScroll = (e) => {
+        if (!forcing) {
+          let scrollTop = scroller.scrollTop;
+          forward = scrollTop > lastScroll;
+          if (
+            (!forward && scrollTop < 1) ||
+            (forward && scrollTop >= getMax() - 1)
+          ) {
+            e.preventDefault();
+            kill();
+          }
+          lastScroll = scrollTop;
+        }
+      };
+    if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
+      addListener("scroll", handleScroll);
+      addListener("touchstart", handleTouch);
+      addListener("touchmove", handleTouch);
+    }
+    scroller.style.overscrollBehavior = "none";
+  }
+  stopOverscroll();
 
 
 // function changeOrientation() {

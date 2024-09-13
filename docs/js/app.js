@@ -4542,11 +4542,10 @@
                 const footer = document.querySelector(".footer");
                 const footerHeight = footer.offsetHeight;
                 clearSpecificScrollTriggers();
-                gsap.set(footer, {
-                    yPercent: 60,
+                gsap.fromTo(footer, {
+                    yPercent: 70,
                     opacity: 0
-                });
-                gsap.to(footer, {
+                }, {
                     yPercent: 0,
                     opacity: 1,
                     ease: "none",
@@ -4628,6 +4627,11 @@
                     if (currentWindowWidth !== lastWindowWidth) {
                         dc.restart(true);
                         lastWindowWidth = currentWindowWidth;
+                        console.log("Resize");
+                        document.body.style.border = "3px solid red";
+                        setTimeout((() => {
+                            document.body.style.border = "none";
+                        }), 2e3);
                     }
                 };
                 window.addEventListener("resize", handler);
@@ -4639,6 +4643,41 @@
                 updateAnimation();
             }));
         }));
+        function stopOverscroll(element) {
+            element = gsap.utils.toArray(element)[0] || window;
+            (element === document.body || element === document.documentElement) && (element = window);
+            let lastTouch, forcing, lastScroll = 0, forward = true, isRoot = element === window, scroller = isRoot ? document.scrollingElement : element, ua = window.navigator.userAgent + "", getMax = isRoot ? () => scroller.scrollHeight - window.innerHeight : () => scroller.scrollHeight - scroller.clientHeight, addListener = (type, func) => element.addEventListener(type, func, {
+                passive: false
+            }), revert = () => {
+                scroller.style.overflowY = "auto";
+                forcing = false;
+            }, kill = () => {
+                forcing = true;
+                scroller.style.overflowY = "hidden";
+                !forward && scroller.scrollTop < 1 ? scroller.scrollTop = 1 : scroller.scrollTop = getMax() - 1;
+                setTimeout(revert, 1);
+            }, handleTouch = e => {
+                let evt = e.changedTouches ? e.changedTouches[0] : e, forward = evt.pageY <= lastTouch;
+                if ((!forward && scroller.scrollTop <= 1 || forward && scroller.scrollTop >= getMax() - 1) && e.type === "touchmove") e.preventDefault(); else lastTouch = evt.pageY;
+            }, handleScroll = e => {
+                if (!forcing) {
+                    let scrollTop = scroller.scrollTop;
+                    forward = scrollTop > lastScroll;
+                    if (!forward && scrollTop < 1 || forward && scrollTop >= getMax() - 1) {
+                        e.preventDefault();
+                        kill();
+                    }
+                    lastScroll = scrollTop;
+                }
+            };
+            if ("ontouchend" in document && !!ua.match(/Version\/[\d\.]+.*Safari/)) {
+                addListener("scroll", handleScroll);
+                addListener("touchstart", handleTouch);
+                addListener("touchmove", handleTouch);
+            }
+            scroller.style.overscrollBehavior = "none";
+        }
+        stopOverscroll();
         window["FLS"] = false;
         isWebp();
         addLoadedClass();
