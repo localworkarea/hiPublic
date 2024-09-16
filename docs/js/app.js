@@ -4641,9 +4641,8 @@
             }));
         }));
         function stopOverscroll(element) {
-            element = gsap.utils.toArray(element)[0] || window;
-            (element === document.body || element === document.documentElement) && (element = window);
-            let lastTouch, forcing, lastScroll = 0, forward = true, isRoot = element === window, scroller = isRoot ? document.scrollingElement : element, ua = window.navigator.userAgent + "", getMax = isRoot ? () => scroller.scrollHeight - window.innerHeight : () => scroller.scrollHeight - scroller.clientHeight, addListener = (type, func) => element.addEventListener(type, func, {
+            element = gsap.utils.toArray(element)[0];
+            let lastTouch, forcing, lastScroll = 0, forward = true, scroller = element, ua = window.navigator.userAgent + "", getMax = () => scroller.scrollHeight - scroller.clientHeight, addListener = (type, func) => element.addEventListener(type, func, {
                 passive: false
             }), revert = () => {
                 scroller.style.overflowY = "auto";
@@ -4674,7 +4673,7 @@
             }
             scroller.style.overscrollBehavior = "none";
         }
-        stopOverscroll();
+        stopOverscroll(document.body);
         function changeOrientation() {
             location.reload();
         }
