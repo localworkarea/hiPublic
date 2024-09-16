@@ -99,11 +99,14 @@ summary::-webkit-details-marker {
 summary {
   list-style: none
 }
-.lock body {
-  overflow: hidden;
-  touch-action: none;
+body {
+  scrollbar-gutter: stable;
   -ms-scroll-chaining: none;
   overscroll-behavior: none
+}
+.lock body {
+  overflow: hidden;
+  touch-action: none
 }
 .loaded body {
   opacity: 1

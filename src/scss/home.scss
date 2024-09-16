@@ -537,6 +537,11 @@
   // .advantages__icon
   &__icon {
     clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 5px 10px 0 rgba(134, 16, 131, 0.35);
+    background-color: $purple;
+    aspect-ratio: 1/1;
     
     @media (min-width:$mobileSmall){
       transition: clip-path .65s ease;
@@ -545,11 +550,6 @@
       transition: clip-path .35s ease;
     }
 
-    display: grid;
-    place-items: center;
-    box-shadow: 0 5px 10px 0 rgba(134, 16, 131, 0.35);
-    background-color: $purple;
-    aspect-ratio: 1/1;
     @include adaptiveValue("margin-bottom", 20, 16);
     img {
       width: 100%;
