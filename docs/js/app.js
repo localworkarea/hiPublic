@@ -4535,29 +4535,11 @@
                 const footer = document.querySelector(".footer");
                 if (main && footer) {
                     const footerHeight = footer.offsetHeight;
-                    main.style.marginBottom = `${footerHeight}px`;
+                    if (window.matchMedia("(min-width: 30.061em)").matches) main.style.marginBottom = `${footerHeight}px`; else main.style.marginBottom = 0;
                 }
             }
             function updateAnimation() {
-                const main = document.querySelector(".page");
-                const lastSection = main.lastElementChild;
-                const footer = document.querySelector(".footer");
-                const footerHeight = footer.offsetHeight;
                 clearSpecificScrollTriggers();
-                gsap.fromTo(footer, {
-                    yPercent: 70,
-                    opacity: 0
-                }, {
-                    yPercent: 0,
-                    opacity: 1,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: lastSection,
-                        start: "bottom bottom",
-                        end: `+=${footerHeight}`,
-                        scrub: true
-                    }
-                });
                 const heroSection = document.querySelector(".hero");
                 const heroWrapper = document.querySelector(".hero__wrapper");
                 if (heroSection) gsap.to(heroWrapper, {
@@ -4570,6 +4552,10 @@
                         scrub: true
                     }
                 });
+                const main = document.querySelector(".page");
+                const lastSection = main.lastElementChild;
+                const footer = document.querySelector(".footer");
+                const footerHeight = footer.offsetHeight;
                 const influencerSection = document.querySelector(".influencers");
                 const influencerContainer = document.querySelector(".influencers__container");
                 const partnersSection = document.querySelector(".partners");
@@ -4584,6 +4570,21 @@
                 }, (context => {
                     let {isDesktop, isMobile} = context.conditions;
                     if (isDesktop) {
+                        if (footer) gsap.fromTo(footer, {
+                            yPercent: 70,
+                            opacity: 0
+                        }, {
+                            yPercent: 0,
+                            opacity: 1,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: lastSection,
+                                start: "bottom bottom",
+                                end: `+=${footerHeight}`,
+                                scrub: true,
+                                invalidateOnRefresh: true
+                            }
+                        });
                         if (influencerSection) gsap.to(influencerContainer, {
                             transform: "translate(0%, -100px)",
                             ease: "none",
@@ -4615,7 +4616,20 @@
                             }
                         });
                     }
-                    if (isMobile) ;
+                    if (isMobile) {
+                        if (footer) gsap.set(footer, {
+                            clearProps: "all"
+                        });
+                        if (influencerContainer) gsap.set(influencerContainer, {
+                            clearProps: "all"
+                        });
+                        if (partnersContainer) gsap.set(partnersContainer, {
+                            clearProps: "all"
+                        });
+                        if (teamContainer) gsap.set(teamContainer, {
+                            clearProps: "all"
+                        });
+                    }
                 }));
             }
             function clearSpecificScrollTriggers() {
@@ -4623,8 +4637,15 @@
                 ScrollTrigger.refresh();
             }
             function callAfterResize(func, delay) {
-                let dc = gsap.delayedCall(delay || .2, func).pause(), handler = () => dc.restart(true);
-                window.addEventListener("orientationchange", handler);
+                let dc = gsap.delayedCall(delay || .2, func).pause(), lastWindowWidth = window.innerWidth;
+                const handler = () => {
+                    const currentWindowWidth = window.innerWidth;
+                    if (currentWindowWidth !== lastWindowWidth) {
+                        dc.restart(true);
+                        lastWindowWidth = currentWindowWidth;
+                    }
+                };
+                window.addEventListener("resize", handler);
                 return handler;
             }
             updateMargin();

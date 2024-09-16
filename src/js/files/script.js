@@ -7,11 +7,6 @@ import { flsModules } from "./modules.js";
 
 document.addEventListener("DOMContentLoaded", function() {
   // 1. ПЛАВНАЯ ПРОКРУТКА СТРАНИЦЫ =========================
-
-// 1. Добавить к тегу body на странице атрибут data-smooth-scroll="true"
-// 2. Вставить следующий код в скрипт
-// 3. Настройка плавного скролла будет осуществляться в изменении параметров в вызове функции smoothScroll(0.08, 0.85);
-
 function smoothScroll(smoothness = 0.08, inertia = 0.85) {
   let scrollPosition = window.pageYOffset;
   let targetPosition = scrollPosition;
@@ -179,25 +174,17 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
     // resizeObserver.observe(document.body);
 
     // Создаем ResizeObserver для отслеживания изменений размера окна
-    let lastWidth = document.body.clientWidth; // Запоминаем начальную ширину
-
+    let lastWidth = document.body.clientWidth; 
     const resizeObserver = new ResizeObserver(entries => {
       entries.forEach(entry => {
-        const currentWidth = entry.contentRect.width; // Получаем текущую ширину
-      
-        if (currentWidth !== lastWidth) { // Проверяем, изменилась ли ширина
-          lastWidth = currentWidth; // Обновляем ширину
-        
-          // Вызовите ваши функции только если изменилась ширина
+        const currentWidth = entry.contentRect.width;
+        if (currentWidth !== lastWidth) { 
+          lastWidth = currentWidth; 
           initSplitType();
-        
-          // Отслеживаем рисайз для функции updateMargin()
           updateMargin();
         }
       });
     });
-
-    // Наблюдаем за изменениями в элементе body (можно выбрать другой контейнер, если нужно)
     resizeObserver.observe(document.body);
 
     // =======================================================================
@@ -207,42 +194,24 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
 
     // Функция для обновления отступа
     function updateMargin() {
-        const main = document.querySelector('.page');
-        const footer = document.querySelector('.footer');
+      const main = document.querySelector('.page');
+      const footer = document.querySelector('.footer');
+      if (main && footer) {
+        const footerHeight = footer.offsetHeight;
+        if (window.matchMedia('(min-width: 30.061em)').matches) {
+            main.style.marginBottom = `${footerHeight}px`; 
+          } else {
+            main.style.marginBottom = 0; 
+          }
+      }
     
-        if (main && footer) {
-            const footerHeight = footer.offsetHeight;
-            main.style.marginBottom = `${footerHeight}px`; // Устанавливаем отступ в пикселях
-        }
     }
 
-
+   
     // Функция для пересчета и обновления анимации футера
     function updateAnimation() {
-        const main = document.querySelector('.page');
-        const lastSection = main.lastElementChild;
-        const footer = document.querySelector('.footer');
-        const footerHeight = footer.offsetHeight;
-
 
         clearSpecificScrollTriggers();
-
-       
-        gsap.fromTo(footer, 
-          { yPercent: 70, opacity: 0 },
-          { 
-              yPercent: 0, 
-              opacity: 1, 
-              ease: "none", 
-              scrollTrigger: {
-                  trigger: lastSection,
-                  start: "bottom bottom",
-                  end: `+=${footerHeight}`, 
-                  scrub: true,
-              },
-          }
-      );
-      
 
         const heroSection = document.querySelector('.hero');
         const heroWrapper = document.querySelector('.hero__wrapper');
@@ -259,6 +228,11 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
                 },
             });
         }
+
+        const main = document.querySelector('.page');
+        const lastSection = main.lastElementChild;
+        const footer = document.querySelector('.footer');
+        const footerHeight = footer.offsetHeight;
 
         const influencerSection = document.querySelector('.influencers');
         const influencerContainer  = document.querySelector('.influencers__container');
@@ -278,6 +252,25 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
           let {isDesktop, isMobile} = context.conditions;
         
           if (isDesktop) {
+
+            if (footer) {
+              gsap.fromTo(footer, 
+                { yPercent: 70, opacity: 0 },
+                { 
+                    yPercent: 0, 
+                    opacity: 1, 
+                    ease: "none", 
+                    scrollTrigger: {
+                        trigger: lastSection,
+                        start: "bottom bottom",
+                        end: `+=${footerHeight}`, 
+                        scrub: true,
+                        invalidateOnRefresh: true,
+                    },
+                }
+              );
+            }
+          
             
             if (influencerSection) {
                 gsap.to(influencerContainer, {
@@ -321,13 +314,23 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
           }
 
 
-          if (isMobile) {}
+          if (isMobile) {
+               // Удаляем анимации, если это мобильное устройство
+              if (footer) {
+                gsap.set(footer, { clearProps: 'all' }); 
+              }
+              if (influencerContainer) {
+                gsap.set(influencerContainer, { clearProps: 'all' });
+              }
+              if (partnersContainer) {
+                gsap.set(partnersContainer, { clearProps: 'all' });
+              }
+              if (teamContainer) {
+                gsap.set(teamContainer, { clearProps: 'all' });
+              }
+          }
 
         });
-        
-
-
-
     }
 
      // Функция для удаления триггеров
@@ -338,32 +341,25 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
 
 
     function callAfterResize(func, delay) {
-      // let dc = gsap.delayedCall(delay || 0.2, func).pause(),
-
-
-      //     lastWindowWidth = window.innerWidth; // Запоминаем текущую ширину
-      // const handler = () => {
-      //     const currentWindowWidth = window.innerWidth;
-      //     if (currentWindowWidth !== lastWindowWidth) {
-      //         dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
-      //         lastWindowWidth = currentWindowWidth; // Обновляем ширину
-      //     }
-      // };
-
-      // window.addEventListener("resize", handler);
-
       let dc = gsap.delayedCall(delay || 0.2, func).pause(),
-      handler = () => dc.restart(true);
-  
-      window.addEventListener("orientationchange", handler);
+          lastWindowWidth = window.innerWidth; 
+      const handler = () => {
+          const currentWindowWidth = window.innerWidth;
+          if (currentWindowWidth !== lastWindowWidth) {
+              dc.restart(true);
+              lastWindowWidth = currentWindowWidth; 
+          }
+      };
+
+      window.addEventListener("resize", handler);
       return handler;
     }
-
+    
     updateMargin();
     updateAnimation();
-
+    
     const resizeHandler = callAfterResize(() => {
-        updateAnimation(); // Ваша функция обновления анимации
+        updateAnimation();
     });
   
 
@@ -431,6 +427,7 @@ function stopOverscroll(element) {
     }
     scroller.style.overscrollBehavior = "none";
   }
+
   stopOverscroll();
 
 
