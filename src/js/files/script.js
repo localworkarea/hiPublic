@@ -338,28 +338,24 @@ if (document.body.getAttribute('data-smooth-scroll') === 'true') {
 
 
     function callAfterResize(func, delay) {
+      // let dc = gsap.delayedCall(delay || 0.2, func).pause(),
+
+
+      //     lastWindowWidth = window.innerWidth; // Запоминаем текущую ширину
+      // const handler = () => {
+      //     const currentWindowWidth = window.innerWidth;
+      //     if (currentWindowWidth !== lastWindowWidth) {
+      //         dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
+      //         lastWindowWidth = currentWindowWidth; // Обновляем ширину
+      //     }
+      // };
+
+      // window.addEventListener("resize", handler);
+
       let dc = gsap.delayedCall(delay || 0.2, func).pause(),
-          lastWindowWidth = window.innerWidth; // Запоминаем текущую ширину
+      handler = () => dc.restart(true);
   
-      const handler = () => {
-          const currentWindowWidth = window.innerWidth;
-          if (currentWindowWidth !== lastWindowWidth) {
-              dc.restart(true); // Перезапускаем задержку и вызываем функцию только если ширина изменилась
-              lastWindowWidth = currentWindowWidth; // Обновляем ширину
-
-            // // Выводим сообщение в консоль
-            // console.log("Resize");
-            // // Добавляем красный бордер на viewport
-            // document.body.style.border = '3px solid red';
-            // // Убираем бордер через 2 секунды
-            // setTimeout(() => {
-            //     document.body.style.border = 'none';
-            // }, 2000);
-
-          }
-      };
-  
-      window.addEventListener("resize", handler);
+      window.addEventListener("orientationchange", handler);
       return handler;
     }
 
@@ -440,7 +436,7 @@ function stopOverscroll(element) {
 
 
 
-function changeOrientation() {
-      location.reload();
-}
-window.addEventListener('orientationchange', changeOrientation);
+// function changeOrientation() {
+//       location.reload();
+// }
+// window.addEventListener('orientationchange', changeOrientation);

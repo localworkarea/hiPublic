@@ -4623,15 +4623,8 @@
                 ScrollTrigger.refresh();
             }
             function callAfterResize(func, delay) {
-                let dc = gsap.delayedCall(delay || .2, func).pause(), lastWindowWidth = window.innerWidth;
-                const handler = () => {
-                    const currentWindowWidth = window.innerWidth;
-                    if (currentWindowWidth !== lastWindowWidth) {
-                        dc.restart(true);
-                        lastWindowWidth = currentWindowWidth;
-                    }
-                };
-                window.addEventListener("resize", handler);
+                let dc = gsap.delayedCall(delay || .2, func).pause(), handler = () => dc.restart(true);
+                window.addEventListener("orientationchange", handler);
                 return handler;
             }
             updateMargin();
@@ -4675,10 +4668,6 @@
             scroller.style.overscrollBehavior = "none";
         }
         stopOverscroll();
-        function changeOrientation() {
-            location.reload();
-        }
-        window.addEventListener("orientationchange", changeOrientation);
         window["FLS"] = false;
         isWebp();
         addLoadedClass();
